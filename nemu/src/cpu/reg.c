@@ -2,6 +2,19 @@
 #include <stdlib.h>
 #include <time.h>
 
+union CPU_state{
+	uint32_t eip;
+
+	uint32_t eax;
+	uint32_t ecx;
+	uint32_t edx;
+	uint32_t ebx;
+	uint32_t esp;
+	uint32_t ebp;
+	uint32_t esi;
+	uint32_t edi;
+};
+
 CPU_state cpu;
 
 const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
