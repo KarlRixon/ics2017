@@ -141,13 +141,20 @@ static int cmd_x(char *args){
 	}
 
 	//convert
-	//int N = atoi(sN);
+	int N = atoi(sN);
 	vaddr_t Addr;
 	sscanf(sEXPR + 2, "%x", &Addr);
 
 	//print
-	//int i;
-	//for(i = 0; i<N; i
+	int i;
+	for(i = 0; i<N; ++i){
+		printf("0x%08x:	", Addr + i*4);
+		int k;
+		for(k = 0; k < 4; ++k){
+			printf("0x%02x	", pmem[Addr+i*4+k]);
+		}
+		printf("\n");
+	}
 
 	return 0;
 }
