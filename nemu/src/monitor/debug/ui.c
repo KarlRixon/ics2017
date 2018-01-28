@@ -99,7 +99,16 @@ static int cmd_info(char *args){
 		return 0;
 	}
 	if(strcmp(args,"r") == 0){
-		
+		printf("reg		hex\n");
+		printf("EAX		0x%08x\n", cpu.eax);
+		printf("ECX		0x%08x\n", cpu.ecx);
+		printf("EDX		0x%08x\n", cpu.edx);
+		printf("EBX		0x%08x\n", cpu.ebx);
+		printf("ESP		0x%08x\n", cpu.esp);
+		printf("EBP		0x%08x\n", cpu.ebp);
+		printf("ESI		0x%08x\n", cpu.esi);
+		printf("EDI		0x%08x\n", cpu.edi);
+		printf("EIP		0x%08x\n", cpu.eip);
 	}
 	else if(strcmp(args,"w") == 0){
 
