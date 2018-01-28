@@ -136,7 +136,7 @@ static int cmd_x(char *args){
 	   return 0;
 	}
 	if(strtok(NULL, " ") != NULL){
-	   printf("too manyarguments\n");
+	   printf("too many arguments\n");
 	   return 0;
 	}
 
