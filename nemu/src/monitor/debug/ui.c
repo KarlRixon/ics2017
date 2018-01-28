@@ -38,6 +38,10 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+static int cmd_si(char *args);
+
+static int cmd_info(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -48,6 +52,9 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
+
+  { "si [N]","Let the program step through N instructions and suspend execution. When N is not given, the default is 1", cmd_si },
+  { "info SUBCMD", "info r: print register state. info w: print monitoring point information", cmd_info },
 
 };
 
@@ -74,6 +81,34 @@ static int cmd_help(char *args) {
     printf("Unknown command '%s'\n", arg);
   }
   return 0;
+}
+
+static int cmd_si(char *args){
+	int n;
+	if(args == NULL)
+		n = 1;
+	else
+		n = atoi(args);
+	cpu_exec(n);
+	return 0;
+}
+
+static int cmd_info(char *args){
+	if(args == NULL){
+		cmd_help("info");
+		return 0;
+	}
+	if(strcmp(args,"r") == 0){
+		
+	}
+	else if(strcmp(args,"w") == 0){
+
+	}
+	else{
+		cmd_help("info");
+		return 0;
+	}
+	return 0;		
 }
 
 void ui_mainloop(int is_batch_mode) {
