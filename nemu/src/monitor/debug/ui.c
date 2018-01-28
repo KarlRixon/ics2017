@@ -121,12 +121,24 @@ static int cmd_info(char *args){
 
 static int cmd_x(char *args){
 	//parse args
-	Assert(args != NULL, "too few arguments");
+	if(args != NULL){
+		printf("too few arguments\n");
+		return 0;
+	}
 	char *sN = strtok(args, " ");
-	Assert(sN != NULL, "too few arguments");
+	if(sN != NULL){
+		printf("too few arguments\n");
+		return 0;
+	}
 	char *sEXPR = strtok(NULL, " ");
-	Assert(sEXPR != NULL, "too few arguments");
-	Assert(strtok(NULL, " ") == NULL, "too manyarguments");
+	if(sEXPR != NULL){
+	   printf("too few arguments\n");
+	   return 0;
+	}
+	if(strtok(NULL, " ") == NULL){
+	   printf("too manyarguments\n");
+	   return 0;
+	}
 
 	//convert
 	//int N = atoi(sN);
