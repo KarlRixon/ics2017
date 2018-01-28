@@ -95,7 +95,7 @@ static int cmd_si(char *args){
 
 static int cmd_info(char *args){
 	if(args == NULL){
-		cmd_help("info");
+		cmd_help("help info");
 		return 0;
 	}
 	if(strcmp(args,"r") == 0){
