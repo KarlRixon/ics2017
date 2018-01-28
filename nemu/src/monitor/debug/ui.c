@@ -121,21 +121,21 @@ static int cmd_info(char *args){
 
 static int cmd_x(char *args){
 	//parse args
-	if(args != NULL){
+	if(args == NULL){
 		printf("too few arguments\n");
 		return 0;
 	}
 	char *sN = strtok(args, " ");
-	if(sN != NULL){
+	if(sN == NULL){
 		printf("too few arguments\n");
 		return 0;
 	}
 	char *sEXPR = strtok(NULL, " ");
-	if(sEXPR != NULL){
+	if(sEXPR == NULL){
 	   printf("too few arguments\n");
 	   return 0;
 	}
-	if(strtok(NULL, " ") == NULL){
+	if(strtok(NULL, " ") != NULL){
 	   printf("too manyarguments\n");
 	   return 0;
 	}
