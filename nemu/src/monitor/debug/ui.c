@@ -54,7 +54,7 @@ static struct {
   /* TODO: Add more commands */
 
   { "si","Let the program step through N instructions and suspend execution. When N is not given, the default is 1", cmd_si },
-  { "info", "info r: print register state. info w: print monitoring point information", cmd_info },
+  { "info", "--r: print register state. --w: print monitoring point information", cmd_info },
 
 };
 
