@@ -21,3 +21,11 @@ void init_wp_pool() {
 /* TODO: Implement the functionality of watchpoint */
 
 
+void show_wp(){
+	WP *p=head;
+	printf("NO		str		value\n");
+	while(p){
+		printf("wp[%d]		%s		%d\n", p->NO,p->str,p->value);
+		p = p->next;
+	}
+}

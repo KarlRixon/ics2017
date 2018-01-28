@@ -42,6 +42,8 @@ static int cmd_si(char *args);
 
 static int cmd_info(char *args);
 
+static int cmd_x(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -55,6 +57,7 @@ static struct {
 
   { "si","Let the program step through N instructions and suspend execution. When N is not given, the default is 1", cmd_si },
   { "info", "--r: print register state. --w: print monitoring point information", cmd_info },
+  { "x", "calculate the value of the expression EXPR, using the result as the starting memory address and outputting a contiguous N 4 bytes in hexadecimal form", cmd_x }, 
 
 };
 
@@ -111,9 +114,30 @@ static int cmd_info(char *args){
 		printf("EIP		0x%08x\n", cpu.eip);
 	}
 	else if(strcmp(args,"w") == 0){
-		
+		show_wp();
 	}
 	return 0;		
+}
+
+static int cmd_x(char *args){
+	//parse args
+	Assert(args != NULL, "too few arguments");
+	char *sN = strtok(args, " ");
+	Assert(sN != NULL, "too few arguments");
+	char *sEXPR = strtok(NULL, " ");
+	Assert(sEXPR != NULL, "too few arguments");
+	Assert(strtok(NULL, " ") == NULL, "too manyarguments");
+
+	//convert
+	//int N = atoi(sN);
+	vaddr_t Addr;
+	sscanf(sEXPR + 2, "%x", &Addr);
+
+	//print
+	//int i;
+	//for(i = 0; i<N; i
+
+	return 0;
 }
 
 void ui_mainloop(int is_batch_mode) {
