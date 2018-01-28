@@ -111,11 +111,7 @@ static int cmd_info(char *args){
 		printf("EIP		0x%08x\n", cpu.eip);
 	}
 	else if(strcmp(args,"w") == 0){
-
-	}
-	else{
-		cmd_help("info");
-		return 0;
+		
 	}
 	return 0;		
 }
