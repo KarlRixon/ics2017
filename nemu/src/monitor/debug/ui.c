@@ -95,7 +95,7 @@ static int cmd_si(char *args){
 
 static int cmd_info(char *args){
 	if(args == NULL){
-		cmd_help("help info");
+		printf("%s - %s\n",cmd_table[4].name, cmd_table[4].description);
 		return 0;
 	}
 	if(strcmp(args,"r") == 0){
