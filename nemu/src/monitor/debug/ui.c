@@ -32,6 +32,7 @@ static int cmd_c(char *args) {
   return 0;
 }
 
+static int cmd_p(char *args);
 static int cmd_q(char *args) {
   return -1;
 }
@@ -177,7 +178,10 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-
+	if(args == NULL){
+		printf(c_green "%s - %s\n" c_normal,cmd_table[6].name, cmd_table[6].description);
+		return 0;
+	}
 	return 0;
 }
 
