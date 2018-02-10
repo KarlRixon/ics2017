@@ -44,6 +44,12 @@ static int cmd_info(char *args);
 
 static int cmd_x(char *args);
 
+static int cmd_p(char *args);
+
+static int cmd_w(char *args);
+
+static int cmd_d(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -57,7 +63,10 @@ static struct {
 
   { "si","Let the program step through N instructions and suspend execution. When N is not given, the default is 1", cmd_si },
   { "info", "[r]: print register state. [w]: print monitoring point information", cmd_info },
-  { "x", "calculate the value of the expression EXPR, using the result as the starting memory address and outputting a contiguous N 4 bytes in hexadecimal form", cmd_x }, 
+  { "x", "calculate the value of the expression EXPR, using the result as the starting memory address and outputting a contiguous N 4 bytes in hexadecimal form", cmd_x },
+  { "p", "the value of the EXPR is calculated, and the operation of the EXPR supports the expression evaluation section in the  debug", cmd_p },
+  { "w", "when the value of the expression EXPR changes, the execution of the program is suspended", cmd_w },
+  { "d", "delete a monitoring point with an ordinal number N", cmd_d },
 
 };
 
@@ -163,6 +172,21 @@ static int cmd_x(char *args){
 	//	printf("0x%x\n", vaddr_read(Addr,4));
 	//	Addr += 4;
 	//}
+
+	return 0;
+}
+
+static int cmd_p(char *args){
+
+	return 0;
+}
+
+static int cmd_w(char *args){
+
+	return 0;
+}
+
+static int cmd_d(char *args){
 
 	return 0;
 }
