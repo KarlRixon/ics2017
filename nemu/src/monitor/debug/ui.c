@@ -56,7 +56,7 @@ static struct {
   /* TODO: Add more commands */
 
   { "si","Let the program step through N instructions and suspend execution. When N is not given, the default is 1", cmd_si },
-  { "info", "--r: print register state. --w: print monitoring point information", cmd_info },
+  { "info", "[r]: print register state. [w]: print monitoring point information", cmd_info },
   { "x", "calculate the value of the expression EXPR, using the result as the starting memory address and outputting a contiguous N 4 bytes in hexadecimal form", cmd_x }, 
 
 };
