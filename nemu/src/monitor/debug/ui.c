@@ -151,13 +151,17 @@ static int cmd_x(char *args){
 
 	//print
 	int i;
-	for(i = 0; i<N; ++i){
-		printf("0x%08x:	", Addr + i*4);
-		int k;
-		for(k = 0; k < 4; ++k){
-			printf("0x%02x	", pmem[Addr+i*4+k]);
-		}
-		printf("\n");
+	//for(i = 0; i<N; ++i){
+	//	printf("0x%08x:	", Addr + i*4);
+	//	int k;
+	//	for(k = 0; k < 4; ++k){
+	//		printf("0x%02x	", pmem[Addr+i*4+k]);
+	//	}
+	//	printf("\n");
+	//}
+	for(i = 0;i < N; ++i){
+		printf("0x%x\n", vaddr_read(Addr,4));
+		Addr += 4;
 	}
 
 	return 0;
