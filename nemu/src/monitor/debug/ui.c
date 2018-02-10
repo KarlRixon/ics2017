@@ -112,7 +112,7 @@ static int cmd_info(char *args){
 		return 0;
 	}
 	if(*args != 'r' && *args != 'w'){
-		puts(c_red c_bold "info SUBCMD；"c_normal c_red " no subcmd specified (register or watchpoint)" c_normal);
+		puts(c_red c_bold "info SUBCMD；"c_normal c_red " no subcmd specified (register or watchpoint)\n" c_normal);
 		return 1;
 	}
 	if(strcmp(args,"r") == 0){
@@ -137,43 +137,51 @@ static int cmd_x(char *args){
 	//parse args
 	if(args == NULL){
 		puts(c_red "too few arguments\n" c_normal);
-		return 0;
+		return 1;
 	}
 	char *sN = strtok(args, " ");
 	if(sN == NULL){
 		puts(c_red "too few arguments\n" c_normal);
-		return 0;
+		return 1;
 	}
 	char *sEXPR = strtok(NULL, " ");
 	if(sEXPR == NULL){
 		puts(c_red "too few arguments\n" c_normal);
-	   return 0;
+		return 1;
 	}
 	if(strtok(NULL, " ") != NULL){
 		puts(c_red "too many arguments\n" c_normal);
-	    return 0;
+	    return 1;
 	}
 
 	//convert
 	int N = atoi(sN);
-	vaddr_t Addr;
-	sscanf(sEXPR + 2, "%x", &Addr);
+	bool success=true;
+	vaddr_t Addr = expr(sEXPR, &success);
+	if(!success){
+		printf(c_red c_bold "error in calculating EXPR\n" c_normal);
+		return 1;
+	}
 
 	//print
 	int i;
-	for(i = 0; i<N; ++i){
-		printf("0x%08x:	", Addr + i*4);
-		int k;
-		for(k =3; k >= 0; --k){
-			printf("0x%02x	", pmem[Addr+i*4+k]);
+	//for(i = 0; i<N; ++i){
+	//	printf("0x%08x:	", Addr + i*4);
+	//	int k;
+	//	for(k =0; k < 4; ++k){
+	//		printf("0x%02x	", pmem[Addr+i*4+k]);
+	//	}
+	//	printf("\n");
+	//}
+	for(i = 0;i < N; ++i){
+		uint32_t data = vaddr_read(Addr,4);
+		printf("0x%08x: ",Addr + i*4);
+		for(int j=0; j<4;++j){
+			printf("0x%02x ", data & 0xff);
+			data = data >> 8;
 		}
 		printf("\n");
 	}
-	//for(i = 0;i < N; ++i){
-	//	printf("0x%x\n", vaddr_read(Addr,4));
-	//	Addr += 4;
-	//}
-
 	return 0;
 }
 
@@ -181,6 +189,17 @@ static int cmd_p(char *args){
 	if(args == NULL){
 		printf(c_green "%s - %s\n" c_normal,cmd_table[6].name, cmd_table[6].description);
 		return 0;
+	}
+	else{
+		bool success = true;
+		uint32_t result = expr(args, &success);
+
+		if(success){
+			printf(c_green c_bold "result = 0x%08x\n" c_normal, result);
+		}
+		else{
+			printf(c_red c_bold "error in calculating EXPR\n" c_normal);
+		}
 	}
 	return 0;
 }
