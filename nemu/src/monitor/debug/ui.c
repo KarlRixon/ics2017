@@ -154,7 +154,7 @@ static int cmd_x(char *args){
 	for(i = 0; i<N; ++i){
 		printf("0x%08x:	", Addr + i*4);
 		int k;
-		for(k =3 ; k <= 0; --k){
+		for(k =3; k >= 0; --k){
 			printf("0x%02x	", pmem[Addr+i*4+k]);
 		}
 		printf("\n");
