@@ -106,7 +106,7 @@ static int cmd_info(char *args){
 		return 1;
 	}
 	if(strcmp(args,"r") == 0){
-		printf("reg		hex\n");
+		printf(c_bold c_yellow "reg		hex\n" c_normal);
 		printf("EAX		0x%08x\n", cpu.eax);
 		printf("ECX		0x%08x\n", cpu.ecx);
 		printf("EDX		0x%08x\n", cpu.edx);
