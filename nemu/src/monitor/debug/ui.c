@@ -101,6 +101,10 @@ static int cmd_info(char *args){
 		printf(c_green "%s - %s\n" c_normal,cmd_table[4].name, cmd_table[4].description);
 		return 0;
 	}
+	if(*args != 'r' && *args != 'w'){
+		puts(c_red "info SUBCMD； no subcmd specified (register or watchpoint)" c_normal);
+		return 1;
+	}
 	if(strcmp(args,"r") == 0){
 		printf("reg		hex\n");
 		printf("EAX		0x%08x\n", cpu.eax);
