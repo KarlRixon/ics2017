@@ -194,6 +194,6 @@ void ui_mainloop(int is_batch_mode) {
       }
     }
 
-    if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
+    if (i == NR_CMD) { printf(c_red "Unknown command '%s'\n" c_normal, cmd); }
   }
 }
