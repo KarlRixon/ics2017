@@ -98,7 +98,7 @@ static int cmd_si(char *args){
 
 static int cmd_info(char *args){
 	if(args == NULL){
-		printf("%s - %s\n",cmd_table[4].name, cmd_table[4].description);
+		printf(c_green "%s - %s\n" c_normal,cmd_table[4].name, cmd_table[4].description);
 		return 0;
 	}
 	if(strcmp(args,"r") == 0){
@@ -127,18 +127,15 @@ static int cmd_x(char *args){
 	}
 	char *sN = strtok(args, " ");
 	if(sN == NULL){
-		//printf("too few arguments\n");
 		puts(c_red "too few arguments\n" c_normal);
 		return 0;
 	}
 	char *sEXPR = strtok(NULL, " ");
 	if(sEXPR == NULL){
-	    //printf("too few arguments\n");
 		puts(c_red "too few arguments\n" c_normal);
 	   return 0;
 	}
 	if(strtok(NULL, " ") != NULL){
-	    //printf("too many arguments\n");
 		puts(c_red "too many arguments\n" c_normal);
 	    return 0;
 	}
