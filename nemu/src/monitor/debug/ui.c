@@ -122,22 +122,25 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
 	//parse args
 	if(args == NULL){
-		printf("too few arguments\n");
+		puts(c_red "too few arguments\n" c_normal);
 		return 0;
 	}
 	char *sN = strtok(args, " ");
 	if(sN == NULL){
-		printf("too few arguments\n");
+		//printf("too few arguments\n");
+		puts(c_red "too few arguments\n" c_normal);
 		return 0;
 	}
 	char *sEXPR = strtok(NULL, " ");
 	if(sEXPR == NULL){
-	   printf("too few arguments\n");
+	    //printf("too few arguments\n");
+		puts(c_red "too few arguments\n" c_normal);
 	   return 0;
 	}
 	if(strtok(NULL, " ") != NULL){
-	   printf("too many arguments\n");
-	   return 0;
+	    //printf("too many arguments\n");
+		puts(c_red "too many arguments\n" c_normal);
+	    return 0;
 	}
 
 	//convert
