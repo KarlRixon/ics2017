@@ -102,7 +102,7 @@ static int cmd_info(char *args){
 		return 0;
 	}
 	if(*args != 'r' && *args != 'w'){
-		puts(c_red "info SUBCMD； no subcmd specified (register or watchpoint)" c_normal);
+		puts(c_red c_bold "info SUBCMD；"c_normal c_red " no subcmd specified (register or watchpoint)" c_normal);
 		return 1;
 	}
 	if(strcmp(args,"r") == 0){
