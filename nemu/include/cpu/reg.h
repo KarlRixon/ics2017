@@ -34,7 +34,7 @@ typedef struct {
 	vaddr_t eip;
 } CPU_state;
 
-extern CPU_state cpu;
+extern CPU_state cpu,old_cpu;
 
 static inline int check_reg_index(int index) {
   assert(index >= 0 && index < 8);
