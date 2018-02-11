@@ -157,7 +157,8 @@ static int cmd_x(char *args){
 	//convert
 	int N = atoi(sN);
 	bool success=true;
-	vaddr_t Addr = expr(sEXPR, &success);
+	vaddr_t Addr = 0x100000;
+	//vaddr_t Addr = expr(sEXPR, &success);
 	if(!success){
 		printf(c_red c_bold "error in calculating EXPR\n" c_normal);
 		return 1;
