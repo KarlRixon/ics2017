@@ -117,7 +117,7 @@ static int cmd_info(char *args){
 	}
 	if(strcmp(args,"r") == 0){
 		printf(c_bold c_yellow "reg		hex\n" c_normal);
-		printf("EAX		0x%08x\n", cpu.eax);
+		printf(c_bold "EAX		0x%08x\n", cpu.eax);
 		printf("ECX		0x%08x\n", cpu.ecx);
 		printf("EDX		0x%08x\n", cpu.edx);
 		printf("EBX		0x%08x\n", cpu.ebx);
@@ -125,7 +125,7 @@ static int cmd_info(char *args){
 		printf("EBP		0x%08x\n", cpu.ebp);
 		printf("ESI		0x%08x\n", cpu.esi);
 		printf("EDI		0x%08x\n", cpu.edi);
-		printf("EIP		0x%08x\n", cpu.eip);
+		printf("EIP		0x%08x\n" c_normal, cpu.eip);
 	}
 	else if(strcmp(args,"w") == 0){
 		show_wp();
@@ -157,10 +157,10 @@ static int cmd_x(char *args){
 	//convert
 	int N = atoi(sN);
 	bool success=true;
-	vaddr_t Addr = 0x100000;
-	//vaddr_t Addr = expr(sEXPR, &success);
+	//vaddr_t Addr = 0x100000;
+	vaddr_t Addr = expr(sEXPR, &success);
 	if(!success){
-		printf(c_red c_bold "error in calculating EXPR\n" c_normal);
+
 		return 1;
 	}
 
