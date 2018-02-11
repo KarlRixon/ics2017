@@ -23,9 +23,9 @@ void init_wp_pool() {
 
 void show_wp(){
 	WP *p=head;
-	printf("NO		str		value\n");
+	printf(c_yellow c_bold "NO		str		value\n" c_normal);
 	while(p){
-		printf("wp[%d]		%s		%d\n", p->NO,p->str,p->value);
+		printf(c_bold "wp[%d]		%s		%d\n" c_normal, p->NO,p->str,p->value);
 		p = p->next;
 	}
 }
