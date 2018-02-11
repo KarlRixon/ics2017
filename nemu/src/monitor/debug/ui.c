@@ -175,7 +175,7 @@ static int cmd_x(char *args){
 	//	printf("\n");
 	//}
 	for(i = 0;i < N; ++i){
-		uint32_t data = vaddr_read(Addr,4);
+		uint32_t data = vaddr_read(Addr + i*4, 4);
 		printf("0x%08x: ",Addr + i*4);
 		for(int j=0; j<4;++j){
 			printf("0x%02x ", data & 0xff);
