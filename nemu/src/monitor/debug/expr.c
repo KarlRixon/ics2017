@@ -229,15 +229,23 @@ bool check_parentheses(int p, int q){
 }
 
 int find_dominant_operator(int p, int q){
-	int i,tp;
+	int i, tp, cnt = 0;
 	int pri = -1, max = 0, dom = -1;
 
 	for(i = p; i<=q; i++){
+		cnt = 0;
 		if(tokens[i].type == OP){
 			++i;
-			while(tokens[i].type != CP)
+			++cnt;
+			while(1){
+				if(tokens[i].type == OP)
+					++cnt;
+				else if(tokens[i].type == CP)
+					--cnt;
 				++i;
-			++i;
+				if(cnt == 0)
+					break;
+			}
 			if(i > q)
 				break;
 		}
