@@ -196,7 +196,7 @@ static int cmd_p(char *args){
 		uint32_t result = expr(args, &success);
 
 		if(success){
-			printf(c_green c_bold "result = 0x%08x\n" c_normal, result);
+			printf(c_green c_bold "result = %d | 0x%08x\n" c_normal, result, result);
 		}
 		else{
 			printf(c_red c_bold "error in calculating EXPR\n" c_normal);

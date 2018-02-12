@@ -359,6 +359,7 @@ uint32_t eval(int p, int q){
 void expr_test(){
 #define N 20
 	int i;
+	bool success = true;
 	char exprs[][N] = {
 		"1+2", "1-2", "1*2", "1/2",
 		"1 == 2", "1 != 2",
@@ -376,7 +377,6 @@ void expr_test(){
 		-1, 2
 	};
 	for(i = 0; i < N; ++i){
-		bool success = true;
 		Log("test: %s = %d", exprs[i], res[i]);
 		if(res[i] != expr(exprs[i], &success)){
 			printf(c_red c_bold "evaluate result: %d\nshould be: %d\n" c_normal, expr(exprs[i], &success), res[i]);
