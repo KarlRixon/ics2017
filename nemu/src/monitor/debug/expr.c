@@ -131,7 +131,7 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
 			case TK_NOTYPE: 
 				printf("1111111111111111111\n");
-				break;
+				continue;
 
 			case SUB:
 				if(nr_token == 0 || check_neg(nr_token - 1)){
