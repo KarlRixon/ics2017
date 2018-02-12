@@ -253,7 +253,7 @@ int find_dominant_operator(int p, int q){
 	if(pri == -1 || dom == -1){
 		printf("pri = %d, dom = %d\n", pri, dom);
 		show_tokens();
-		printf(c_red c_bold "cannot find dominant\n" c_normal);
+		printf(c_red c_bold "cannot find dominant\ni = %d" c_normal, i);
 		assert(0);
 	}
 	return dom;	
@@ -271,9 +271,8 @@ int priority(int i){
 		case ADD:
 		case SUB:
 			return 4;
-		case MUL:return 3;
+		case MUL:
 		case DIV:
-				printf("1111111111111111111\n");
 			return 3;
 		case LNOT:
 		case INDICATOR:
