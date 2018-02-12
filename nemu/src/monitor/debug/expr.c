@@ -183,6 +183,7 @@ bool check_parentheses(int p, int q);
 int find_dominant_operator(int p, int q);
 int priority(int i);
 void expr_test();
+void show_tokens();
 
 uint32_t expr(char *e, bool *success) {
   //int i = 0;
@@ -249,6 +250,7 @@ int find_dominant_operator(int p, int q){
 	}
 	if(pri == -1 || dom == -1){
 		printf("pri = %d, dom = %d\n", pri, dom);
+		show_tokens();
 		printf(c_red c_bold "cannot find dominant\n" c_normal);
 		assert(0);
 	}
@@ -355,6 +357,13 @@ uint32_t eval(int p, int q){
 		}
 	}
 	return 1;
+}
+
+void show_tokens(){
+	int i;
+	for(i = 0; i < nr_token; ++i){
+		printf("%d: %d %s\n", i, tokens[i].type, tokens[i].str);
+	}
 }
 
 void expr_test(){
