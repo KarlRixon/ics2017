@@ -269,6 +269,7 @@ int priority(int i){
 		case TK_NEQ:
 			return 7;
 		case ADD:
+				printf("1111111111111111111\n");
 		case SUB:
 			return 4;
 		case MUL:
