@@ -47,7 +47,7 @@ static struct rule {
   {"\\)", CP},			// close parenthesis
   
   {"0[xX][0-9a-fA-F]+", HEX_NUM},	//hexadecimal number
-  {"\\d+", DEC_NUM},		// decimal(natural) number
+  {"[0-9][1-9]+", DEC_NUM},		// decimal(natural) number
 
   {"\\$e(ax|bx|cx|dx|sp|bp|si|di|ip)", REG_NAME},	//register
 
