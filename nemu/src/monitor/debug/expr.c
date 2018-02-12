@@ -356,6 +356,8 @@ uint32_t eval(int p, int q){
 
 void expr_test(){
 #define N 20
+	printf("%d", N);
+	assert(0);
 	int i;
 	char exprs[][N] = {
 		"1+2", "1-2", "1*2", "1/2",
