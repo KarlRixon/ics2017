@@ -171,6 +171,7 @@ static bool make_token(char *e) {
     }
 
     if (i == NR_REGEX) {
+	  printf("i = %d\n", i);
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
     }
@@ -264,7 +265,7 @@ int find_dominant_operator(int p, int q){
 		printf(c_red c_bold "cannot find dominant\ni = %d" c_normal, i);
 		assert(0);
 	}
-	printf("i = %d, pri = %d, dom = %d, p = %d, q = %d\n", i, pri, dom, p, q);
+	//printf("i = %d, pri = %d, dom = %d, p = %d, q = %d\n", i, pri, dom, p, q);
 	return dom;	
 }
 
