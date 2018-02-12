@@ -119,8 +119,8 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
-            i, rules[i].regex, position, substr_len, substr_len, substr_start);
+        //Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+        //    i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
@@ -184,10 +184,10 @@ int find_dominant_operator(int p, int q);
 int priority(int i);
 
 uint32_t expr(char *e, bool *success) {
-  int i = 0;
-  for(i = 0; i < nr_token; ++i){
-	  printf("tokens[%d] = %s\n", i, tokens[i].str);
-  }
+  //int i = 0;
+  //for(i = 0; i < nr_token; ++i){
+  //  printf("tokens[%d] = %s\n", i, tokens[i].str);
+  //}
 
   if (!make_token(e)) {
 	printf(c_red "make tokens failed\n" c_normal);
