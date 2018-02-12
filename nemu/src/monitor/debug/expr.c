@@ -5,6 +5,7 @@
  */
 #include <sys/types.h>
 #include <regex.h>
+#include <stdlib.h>
 
 enum {
   TK_NOTYPE = 256, TK_EQ, TK_NEQ,
@@ -207,6 +208,75 @@ uint32_t eval(int p, int q){
 	if(p > q){
 		panic(c_red c_bold "bad expression" c_normal);
 	}
+	else if(p == q){
+		int type = tokens[p].type;
+		uint32_t t = 0;
+		switch(type){
+			case DEC_NUM:
+				return atoi(tokens[p].str);
+			case HEX_NUM:
+				sscanf(tokens[p].str + 2, "%x", &t);
+				return t;
+			case REG_NAME:
+				if(strcmp(tokens[p].str, "eax") == 0)
+					return cpu.eax;
+				else if(strcmp(tokens[p].str, "ebx") == 0)
+					return cpu.ebx;
+				else if(strcmp(tokens[p].str, "ecx") == 0)
+					return cpu.ecx;
+				else if(strcmp(tokens[p].str, "edx") == 0)
+					return cpu.edx;
+				else if(strcmp(tokens[p].str, "esp") == 0)
+					return cpu.esp;
+				else if(strcmp(tokens[p].str, "ebp") == 0)
+					return cpu.ebp;
+				else if(strcmp(tokens[p].str, "esi") == 0)
+					return cpu.esi;
+				else if(strcmp(tokens[p].str, "edi") == 0)
+					return cpu.edi;
+				else if(strcmp(tokens[p].str, "eip") == 0)
+					return cpu.eip;
+				else
+					assert(0);
+			default:
+				assert(0);
+		}
+	}
+	else if(check_parentheses(p, q) == true){
+		return eval(p + 1, q - 1);
+	}
+	else{
+		int op = find_dominant_operator(p, q);
+		// check monadic operator first
+		if(tokens[op].type == NEGTIVE)
+			return -1 * eval(op + 1, q);
+		if(tokens[op].type == INDICATOR)
+			return vaddr_read(eval(op + 1, q), 4);
+		if(tokens[op].type == LNOT)
+			return !eval(op + 1, q);
 
-	return 0;
+		int val1 = eval(p, op - 1);
+		int val2 = eval(op + 1, q);
+
+		switch(tokens[op].type){
+			case ADD:
+				return val1 + val2;
+			case SUB:
+				return val1 - val2;
+			case MUL:
+				return val1 * val2;
+			case DIV:
+				return val1 / val2;
+			case LAND:
+				return val1 && val2;
+			case LOR:
+				return val1 || val2;
+			case TK_EQ:
+				return val1 == val2;
+			case TK_NEQ:
+				return val1 != val2;
+			default:
+				assert(0);
+		}
+	}
 }
