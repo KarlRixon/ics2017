@@ -398,7 +398,7 @@ void expr_test(){
 		0, 1, 0, 1,
 		-1, 2
 	};
-	for(i = 0; i < 10; ++i){
+	for(i = 0; i < 1; ++i){
 		Log("test: %s = %d", exprs[i], res[i]);
 		if(res[i] != expr(exprs[i], &success)){
 			printf(c_red c_bold "evaluate result: %d\nshould be: %d\n" c_normal, expr(exprs[i], &success), res[i]);
