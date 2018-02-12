@@ -190,7 +190,9 @@ uint32_t expr(char *e, bool *success) {
   //  printf("tokens[%d] = %s\n", i, tokens[i].str);
   //}
 
-  expr_test();
+  if(strcmp(e, "test") == 0){
+	  expr_test();
+  }
 
   if (!make_token(e)) {
 	printf(c_red "make tokens failed\n" c_normal);
