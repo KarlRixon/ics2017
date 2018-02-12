@@ -256,7 +256,7 @@ int find_dominant_operator(int p, int q){
 		printf(c_red c_bold "cannot find dominant\ni = %d" c_normal, i);
 		assert(0);
 	}
-	printf("i = %d, pri = %d, dom = %d\n", i, pri, dom);
+	printf("i = %d, pri = %d, dom = %d, p = %d, q = %d\n", i, pri, dom, p, q);
 	return dom;	
 }
 
@@ -270,7 +270,6 @@ int priority(int i){
 		case TK_NEQ:
 			return 7;
 		case ADD:
-				printf("1111111111111111111\n");
 		case SUB:
 			return 4;
 		case MUL:
