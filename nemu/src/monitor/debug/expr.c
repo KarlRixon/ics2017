@@ -256,7 +256,7 @@ int find_dominant_operator(int p, int q){
 		printf(c_red c_bold "cannot find dominant\ni = %d" c_normal, i);
 		assert(0);
 	}
-	printf("%d",i);
+	printf("i = %d, pri = %d, dom = %d\n", i, pri, dom);
 	return dom;	
 }
 
