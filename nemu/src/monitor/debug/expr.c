@@ -195,7 +195,9 @@ uint32_t expr(char *e, bool *success) {
   //  printf("tokens[%d] = %s\n", i, tokens[i].str);
   //}
 
+  test_flag = false;
   if(strcmp(e, "test") == 0){
+	  test_flag = true;
 	  expr_test();
   }
 
@@ -381,7 +383,6 @@ void show_tokens(){
 }
 
 void expr_test(){
-	test_flag = true;
 #define N 20
 	int i;
 	bool success = true;
