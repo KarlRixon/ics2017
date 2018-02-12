@@ -130,7 +130,6 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
 			case TK_NOTYPE: 
-				printf("1111111111111111111\n");
 				continue;
 
 			case SUB:
@@ -206,7 +205,7 @@ uint32_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
   else{
-	  show_tokens();
+	  //show_tokens();
 	  *success = true;
 	  return eval(0, nr_token - 1);
   }
@@ -271,6 +270,8 @@ int priority(int i){
 			return 7;
 		case ADD:
 		case SUB:
+
+				printf("1111111111111111111\n");
 			return 4;
 		case MUL:
 		case DIV:
