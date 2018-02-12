@@ -268,13 +268,12 @@ int priority(int i){
 		case TK_EQ:
 		case TK_NEQ:
 			return 7;
-		case ADD:return 4;
+		case ADD:
 		case SUB:
-
-				printf("1111111111111111111\n");
 			return 4;
-		case MUL:
+		case MUL:return 3;
 		case DIV:
+				printf("1111111111111111111\n");
 			return 3;
 		case LNOT:
 		case INDICATOR:
