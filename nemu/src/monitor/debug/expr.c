@@ -176,7 +176,15 @@ static bool make_token(char *e) {
   return true;
 }
 
+uint32_t eval(int p, int q);
+bool check_parentheses(int p, int q);
+int find_dominant_operator(int p, int q);
+
 uint32_t expr(char *e, bool *success) {
+  for(int i = 0; i < nr_token; ++i){
+	  printf("tokens[%d] = %s\n", i, tokens[i].str);
+  }
+
   if (!make_token(e)) {
     *success = false;
     return 0;
