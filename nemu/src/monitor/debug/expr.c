@@ -188,12 +188,25 @@ uint32_t expr(char *e, bool *success) {
   }
 
   if (!make_token(e)) {
+	printf(c_red "make tokens failed\n" c_normal);
     *success = false;
     return 0;
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+  //TODO();
+  else{
+	  *success = true;
+	  return eval(0, nr_token - 1);
+  }
 
   return 0;
+}
+
+uint32_t eval(int p, int q){
+	if(p > q){
+		panic(c_red c_bold "bad expression" c_normal);
+	}
+
+	return 0;
 }
