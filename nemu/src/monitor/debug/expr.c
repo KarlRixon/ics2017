@@ -250,7 +250,7 @@ int find_dominant_operator(int p, int q){
 	}
 	if(pri == -1 || dom == -1){
 		printf("pri = %d, dom = %d\n", pri, dom);
-		show_tokens();
+		//show_tokens();
 		printf(c_red c_bold "cannot find dominant\n" c_normal);
 		assert(0);
 	}
