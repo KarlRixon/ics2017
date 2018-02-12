@@ -99,7 +99,6 @@ static bool check_ind(int t){
 		return false;
 }
 
-bool test_flag;
 
 static bool make_token(char *e) {
   int position = 0;
@@ -172,7 +171,7 @@ static bool make_token(char *e) {
       }
     }
 
-    if (i == NR_REGEX && test_flag != true) {
+    if (i == NR_REGEX) {
 	  printf("i = %d\n", i);
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
@@ -195,10 +194,9 @@ uint32_t expr(char *e, bool *success) {
   //  printf("tokens[%d] = %s\n", i, tokens[i].str);
   //}
 
-  test_flag = false;
   if(strcmp(e, "test") == 0){
-	  test_flag = true;
 	  expr_test();
+	  return 0;
   }
 
   if (!make_token(e)) {
