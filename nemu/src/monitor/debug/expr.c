@@ -181,7 +181,8 @@ bool check_parentheses(int p, int q);
 int find_dominant_operator(int p, int q);
 
 uint32_t expr(char *e, bool *success) {
-  for(int i = 0; i < nr_token; ++i){
+  int i = 0;
+  for(i = 0; i < nr_token; ++i){
 	  printf("tokens[%d] = %s\n", i, tokens[i].str);
   }
 
