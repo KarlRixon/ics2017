@@ -16,6 +16,8 @@ enum {
   OP, CP,
   HEX_NUM, DEC_NUM,
   REG_NAME,
+  NEGTIVE,
+  INDICATOR,
 
 };
 
@@ -29,7 +31,7 @@ static struct rule {
    */
 
   {"\\+", ADD},         // plus
-  {"-", SUB},			// minus or neg
+  {"-", SUB},			// minus or negtive
   {"\\*", MUL},			// multiply or indicator
   {"/", DIV},			// divide
   
@@ -80,6 +82,22 @@ typedef struct token {
 Token tokens[32];
 int nr_token;
 
+static bool check_neg(int t){
+	int p = tokens[t].type;
+	if(p == ADD || p == SUB || p == MUL || p == DIV || p == OP || p == NEGTIVE || p == INDICATOR)
+		return true;
+	else
+		return false;
+}
+
+static bool check_ind(int t){
+	int p = tokens[t].type;
+	if(p == ADD || p == SUB || p == MUL || p == DIV || p == OP || p == NEGTIVE || p == INDICATOR || p == LAND || p == LOR || p == LNOT)
+		return true;
+	else
+		return false;
+}
+
 static bool make_token(char *e) {
   int position = 0;
   int i;
@@ -92,6 +110,10 @@ static bool make_token(char *e) {
     for (i = 0; i < NR_REGEX; i ++) {
 	  //printf("tring %d : %s\n", i, rules[i].regex);
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0){
+		if(nr_token > 31){
+		   printf(c_red c_bold "too many tokens\n" c_normal);
+		   return false;
+		}
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
@@ -105,9 +127,42 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default: TODO();
-        }
+			case TK_NOTYPE: break;
 
+			case SUB:
+				if(nr_token == 0 || check_neg(nr_token - 1)){
+					tokens[nr_token].type = NEGTIVE;
+				}
+				else{
+					tokens[nr_token].type = rules[i].token_type;
+				}
+				break;
+			
+			case MUL:
+				if(nr_token == 0 || check_ind(nr_token - 1)){
+					tokens[nr_token].type = INDICATOR;
+				}
+				else{
+					tokens[nr_token].type = rules[i].token_type;
+				}
+				break;
+
+			case HEX_NUM:
+			case DEC_NUM:
+			case REG_NAME:
+				if(substr_len > 31){
+					printf(c_red c_bold "value too long\n" c_normal);
+					return false;
+				}
+				strncpy(tokens[nr_token].str, substr_start, substr_len);
+				tokens[nr_token].str[substr_len] = '\0';
+				tokens[nr_token].type = rules[i].token_type;
+				break;
+
+			default: tokens[nr_token].type = rules[i].token_type;
+					 break;
+        }
+		++nr_token;
         break;
       }
     }
