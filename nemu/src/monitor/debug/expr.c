@@ -287,23 +287,23 @@ uint32_t eval(int p, int q){
 				sscanf(tokens[p].str + 2, "%x", &t);
 				return t;
 			case REG_NAME:
-				if(strcmp(tokens[p].str, "eax") == 0)
+				if(strcmp(tokens[p].str, "$eax") == 0)
 					return cpu.eax;
-				else if(strcmp(tokens[p].str, "ebx") == 0)
+				else if(strcmp(tokens[p].str, "$ebx") == 0)
 					return cpu.ebx;
-				else if(strcmp(tokens[p].str, "ecx") == 0)
+				else if(strcmp(tokens[p].str, "$ecx") == 0)
 					return cpu.ecx;
-				else if(strcmp(tokens[p].str, "edx") == 0)
+				else if(strcmp(tokens[p].str, "$edx") == 0)
 					return cpu.edx;
-				else if(strcmp(tokens[p].str, "esp") == 0)
+				else if(strcmp(tokens[p].str, "$esp") == 0)
 					return cpu.esp;
-				else if(strcmp(tokens[p].str, "ebp") == 0)
+				else if(strcmp(tokens[p].str, "$ebp") == 0)
 					return cpu.ebp;
-				else if(strcmp(tokens[p].str, "esi") == 0)
+				else if(strcmp(tokens[p].str, "$esi") == 0)
 					return cpu.esi;
-				else if(strcmp(tokens[p].str, "edi") == 0)
+				else if(strcmp(tokens[p].str, "$edi") == 0)
 					return cpu.edi;
-				else if(strcmp(tokens[p].str, "eip") == 0)
+				else if(strcmp(tokens[p].str, "$eip") == 0)
 					return cpu.eip;
 				else
 					assert(0);
