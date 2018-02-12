@@ -232,7 +232,7 @@ int find_dominant_operator(int p, int q){
 	int i,tp;
 	int pri = -1, max = 0, dom = -1;
 
-	for(i = p; i<+q; i++){
+	for(i = p; i<=q; i++){
 		if(tokens[i].type == OP){
 			++i;
 			while(tokens[i].type != CP)
