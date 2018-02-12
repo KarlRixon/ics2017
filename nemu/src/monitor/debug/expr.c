@@ -47,7 +47,7 @@ static struct rule {
   {"\\)", CP},			// close parenthesis
   
   {"0[xX][0-9a-fA-F]+", HEX_NUM},	//hexadecimal number
-  {"[0-9]*[1-9]*", DEC_NUM},		// decimal(natural) number
+  {"[0-9]+", DEC_NUM},		// decimal(natural) number
 
   {"\\$e(ax|bx|cx|dx|sp|bp|si|di|ip)", REG_NAME},	//register
 
@@ -112,6 +112,7 @@ static bool make_token(char *e) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0){
 		if(nr_token > 31){
 		   printf(c_red c_bold "too many tokens\n" c_normal);
+		   nr_token = 0;
 		   return false;
 		}
         char *substr_start = e + position;
