@@ -108,7 +108,7 @@ static bool make_token(char *e) {
 
   while (e[position] != '\0') {
     /* Try all rules one by one. */
-    for (i = 0; i < NR_REGEX; i ++) {
+    for (i = 0; i < NR_REGEX; i++) {
 	  //printf("tring %d : %s\n", i, rules[i].regex);
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0){
 		if(nr_token > 31){
@@ -398,7 +398,7 @@ void expr_test(){
 		0, 1, 0, 1,
 		-1, 2
 	};
-	for(i = 0; i < N; ++i){
+	for(i = 0; i < 10; ++i){
 		Log("test: %s = %d", exprs[i], res[i]);
 		if(res[i] != expr(exprs[i], &success)){
 			printf(c_red c_bold "evaluate result: %d\nshould be: %d\n" c_normal, expr(exprs[i], &success), res[i]);
