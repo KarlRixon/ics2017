@@ -181,6 +181,7 @@ static bool make_token(char *e) {
 uint32_t eval(int p, int q);
 bool check_parentheses(int p, int q);
 int find_dominant_operator(int p, int q);
+int priority(int i);
 
 uint32_t expr(char *e, bool *success) {
   int i = 0;
@@ -202,6 +203,74 @@ uint32_t expr(char *e, bool *success) {
   }
 
   return 0;
+}
+
+bool check_parentheses(int p, int q){
+	int i, par = 0;
+	if(tokens[p].type != OP || tokens[q].type != CP)
+		return false;
+	for(i = p; i < q; ++i){
+		if(tokens[i].type == OP)
+			++par;
+		else if(tokens[i].type == CP)
+			--par;
+		if(par == 0 && i < q)
+			return false;
+	}
+	return true;
+}
+
+int find_dominant_operator(int p, int q){
+	int i,tp;
+	int pri = -1, max = 0, dom = -1;
+
+	for(i = p; i<+q;++i){
+		if(tokens[i].type == OP){
+			++i;
+			while(tokens[i].type != CP)
+				++i;
+			++i;
+			if(i > q)
+				break;
+		}
+		tp = tokens[i].type;
+		if(tp == HEX_NUM || tp == DEC_NUM || tp == REG_NAME)
+			continue;
+		pri = priority(i);
+		if(pri > max && pri != -1){
+			max = pri;
+			dom = i;
+		}
+	}
+	if(pri == -1 || dom == -1){
+		printf(c_red c_bold "cannot find dominant\n" c_normal);
+		assert(0);
+	}
+	return dom;	
+}
+
+int priority(int i){
+	switch(tokens[i].type){
+		case LOR:
+			return 12;
+		case LAND:
+			return 11;
+		case TK_EQ:
+		case TK_NEQ:
+			return 7;
+		case ADD:
+		case SUB:
+			return 4;
+		case MUL:
+		case DIV:
+			return 3;
+		case LNOT:
+		case INDICATOR:
+		case NEGTIVE:
+			return 2;
+		default:
+			return -1;
+	}
 }
 
 uint32_t eval(int p, int q){
@@ -279,4 +348,5 @@ uint32_t eval(int p, int q){
 				assert(0);
 		}
 	}
+	return 1;
 }
