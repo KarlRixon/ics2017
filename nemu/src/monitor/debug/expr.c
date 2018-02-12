@@ -182,12 +182,15 @@ uint32_t eval(int p, int q);
 bool check_parentheses(int p, int q);
 int find_dominant_operator(int p, int q);
 int priority(int i);
+void expr_test();
 
 uint32_t expr(char *e, bool *success) {
   //int i = 0;
   //for(i = 0; i < nr_token; ++i){
   //  printf("tokens[%d] = %s\n", i, tokens[i].str);
   //}
+
+  expr_test();
 
   if (!make_token(e)) {
 	printf(c_red "make tokens failed\n" c_normal);
@@ -349,4 +352,33 @@ uint32_t eval(int p, int q){
 		}
 	}
 	return 1;
+}
+
+void expr_test(){
+#define N 20
+	int i;
+	char exprs[][N] = {
+		"1+2", "1-2", "1*2", "1/2",
+		"1 == 2", "1 != 2",
+		"1&&1", "1&&0", "0&&1", "0&&0",
+		"1||1", "1||0", "0||1", "0||0",
+		"!1", "!0", "!0x1", "!0x0",
+		"-1", "(-1*(5-6)+3)/2"
+	};
+	int res[N] = {
+		3, -1, 2, 0,
+		0, 1,
+		1, 0, 0, 0,
+		1, 1, 1, 0,
+		0, 1, 0, 1,
+		-1, 2
+	};
+	for(i = 0; i < N; ++i){
+		bool success = true;
+		Log(c_bold "test: %s = %d" c_normal, exprs[i], res[i]);
+		if(res[i] != expr(exprs[i], &success)){
+			printf(c_red c_bold "evaluate result: %d\nshould be: %d\n" c_normal, expr(exprs[i], &success), res[i]);
+			return;
+		}
+	}
 }
