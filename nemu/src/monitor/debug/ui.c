@@ -108,7 +108,7 @@ static int cmd_si(char *args){
 
 static int cmd_info(char *args){
 	if(args == NULL){
-		printf(c_green "%s - %s\n" c_normal,cmd_table[4].name, cmd_table[4].description);
+		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[4].name, cmd_table[4].description);
 		return 0;
 	}
 	if(*args != 'r' && *args != 'w'){
@@ -176,9 +176,9 @@ static int cmd_x(char *args){
 	//}
 	for(i = 0;i < N; ++i){
 		uint32_t data = vaddr_read(Addr + i*4, 4);
-		printf("0x%08x: ",Addr + i*4);
+		printf(c_cyan c_bold "0x%08x: " c_normal,Addr + i*4);
 		for(int j=0; j<4;++j){
-			printf("0x%02x ", data & 0xff);
+			printf(c_bold "0x%02x " c_normal, data & 0xff);
 			data = data >> 8;
 		}
 		printf("\n");
