@@ -216,7 +216,7 @@ static int cmd_w(char *args){
 		
 		if(success){
 			new_wp(args, result);
-			printf(c_green c_bold "added a watchpoint: %s = %d | %x\n" c_normal, args, result, result);
+			printf(c_green c_bold "added a watchpoint: %s = %d | 0x%x\n" c_normal, args, result, result);
 		}
 		else{
 			printf(c_red c_bold "error in calculating EXPR\n" c_normal);
