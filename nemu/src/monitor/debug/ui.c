@@ -206,11 +206,19 @@ static int cmd_p(char *args){
 }
 
 static int cmd_w(char *args){
+	if(args == NULL){
+		printf(c_green "%s - %s\n" c_normal,cmd_table[7].name, cmd_table[7].description);
+		return 0;
+	}
 
 	return 0;
 }
 
 static int cmd_d(char *args){
+	if(args == NULL){
+		printf(c_green "%s - %s\n" c_normal,cmd_table[8].name, cmd_table[8].description);
+		return 0;
+	}
 
 	return 0;
 }
