@@ -68,6 +68,7 @@ void free_wp(int no){
 		head = p->next;
 		p->next = free_;
 		free_ = p;
+		printf(c_blue c_bold "deleted a watchpoint: %s = %d | %x\n" c_normal, p->str, p->value, p->value);
 		return;
 	}
 	else{
@@ -81,6 +82,7 @@ void free_wp(int no){
 				head = p->next;
 				p->next = free_;
 				free_ = p;
+				printf(c_blue c_bold "deleted a watchpoint: %s = %d | %x\n" c_normal, p->str, p->value, p->value);
 				return;
 			}
 			else{
