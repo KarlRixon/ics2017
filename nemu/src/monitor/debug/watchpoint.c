@@ -62,13 +62,13 @@ void free_wp(int no){
 		return;
 	}
 	else if(p->NO == no){
+		printf(c_blue c_bold "deleted a watchpoint: %s = %d | %x\n" c_normal, p->str, p->value, p->value);
 		memset(p->str, 0, sizeof(p->str)-1);
 		p->value = 0;
 		
 		head = p->next;
 		p->next = free_;
 		free_ = p;
-		printf(c_blue c_bold "deleted a watchpoint: %s = %d | %x\n" c_normal, p->str, p->value, p->value);
 		return;
 	}
 	else{
@@ -76,13 +76,13 @@ void free_wp(int no){
 		p = q->next;
 		while(p != NULL){
 			if(p->NO == no){
+				printf(c_blue c_bold "deleted a watchpoint: %s = %d | %x\n" c_normal, p->str, p->value, p->value);
 				memset(p->str, 0, sizeof(p->str)-1);
 				p->value = 0;
 
 				q->next = p->next;
 				p->next = free_;
 				free_ = p;
-				printf(c_blue c_bold "deleted a watchpoint: %s = %d | %x\n" c_normal, p->str, p->value, p->value);
 				return;
 			}
 			else{
