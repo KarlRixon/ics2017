@@ -210,11 +210,19 @@ static int cmd_w(char *args){
 		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[7].name, cmd_table[7].description);
 		return 0;
 	}
-//	char *expr = strtok(args, "=");
-//	char *value = strtok(NULL, "=");
-	
-
-	return 0;
+	else{
+		bool success;
+		uint32_t result = expr(args, &success);
+		
+		if(success){
+			new_wp(args, result);
+			printf(c_green c_bold "added a watchpoint: %s = %d | %x\n" c_normal, args, result, result);
+		}
+		else{
+			printf(c_red c_bold "error in calculating EXPR\n" c_normal);
+		}
+		return 0;
+	}
 }
 
 static int cmd_d(char *args){
