@@ -210,7 +210,7 @@ static int cmd_w(char *args){
 		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[7].name, cmd_table[7].description);
 		return 0;
 	}
-
+	
 	return 0;
 }
 
@@ -219,7 +219,16 @@ static int cmd_d(char *args){
 		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[8].name, cmd_table[8].description);
 		return 0;
 	}
-
+	else{
+		int no = atoi(args);
+		if(no > 0 && no < 33){
+			free_wp(no);
+		}
+		else{
+			printf(c_red c_bold "input error\n" c_normal);
+			return 1;
+		}
+	}
 	return 0;
 }
 
