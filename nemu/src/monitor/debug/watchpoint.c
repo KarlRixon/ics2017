@@ -94,3 +94,22 @@ void free_wp(int no){
 	printf(c_red c_bold "no such watchpoint\n" c_normal);
 	return;
 }
+
+WP* check_wp(WP *w){
+	if(w == NULL){
+		w = head;
+	}
+	while(w != NULL){
+		bool success = false;
+		int result = expr(w->str, &success);
+		if(!success){
+			printf(c_red c_bold "error in calculating EXPR\n" c_normal);
+			assert(0);
+		}
+		else if(result != w->value){
+			w->value = result;
+			return w;
+		}
+	}
+	return NULL;
+}
