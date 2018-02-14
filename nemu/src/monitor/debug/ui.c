@@ -210,7 +210,10 @@ static int cmd_w(char *args){
 		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[7].name, cmd_table[7].description);
 		return 0;
 	}
+//	char *expr = strtok(args, "=");
+//	char *value = strtok(NULL, "=");
 	
+
 	return 0;
 }
 
@@ -221,7 +224,7 @@ static int cmd_d(char *args){
 	}
 	else{
 		int no = atoi(args);
-		if(no > 0 && no < 33){
+		if(no >= 0 && no < 32){
 			free_wp(no);
 		}
 		else{
