@@ -136,7 +136,7 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
 	//parse args
 	if(args == NULL){
-		puts(c_red "too few arguments\n" c_normal);
+		puts(c_red c_bold "too few arguments\n" c_normal);
 		return 1;
 	}
 	char *sN = strtok(args, " ");
@@ -188,7 +188,7 @@ static int cmd_x(char *args){
 
 static int cmd_p(char *args){
 	if(args == NULL){
-		printf(c_green "%s - %s\n" c_normal,cmd_table[6].name, cmd_table[6].description);
+		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[6].name, cmd_table[6].description);
 		return 0;
 	}
 	else{
@@ -207,7 +207,7 @@ static int cmd_p(char *args){
 
 static int cmd_w(char *args){
 	if(args == NULL){
-		printf(c_green "%s - %s\n" c_normal,cmd_table[7].name, cmd_table[7].description);
+		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[7].name, cmd_table[7].description);
 		return 0;
 	}
 
@@ -216,7 +216,7 @@ static int cmd_w(char *args){
 
 static int cmd_d(char *args){
 	if(args == NULL){
-		printf(c_green "%s - %s\n" c_normal,cmd_table[8].name, cmd_table[8].description);
+		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[8].name, cmd_table[8].description);
 		return 0;
 	}
 
