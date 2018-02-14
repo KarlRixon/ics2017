@@ -110,6 +110,7 @@ WP* check_wp(WP *w){
 			w->value = result;
 			return w;
 		}
+		w = w->next;
 	}
 	return NULL;
 }
