@@ -54,4 +54,4 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 count:
-	./lcount.sh
+	bash ./lcount.sh
