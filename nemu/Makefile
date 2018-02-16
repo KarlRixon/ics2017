@@ -52,3 +52,6 @@ gdb: $(BINARY)
 
 clean: 
 	rm -rf $(BUILD_DIR)
+
+count:
+	$(warning $(shell find . -name *.[ch] | xargs cat | wc -l)-$(shell git checkout 2017 && find . -name *.[ch] | xargs cat |wc -l))
