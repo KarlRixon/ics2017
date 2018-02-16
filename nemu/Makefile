@@ -54,6 +54,4 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 count:
-	n=$(shell find . -name *.[ch] | xargs cat | wc -l)
-	p=$(shell git checkout 2017 && find . -name *.[ch] | xargs cat |wc -l)
-	$(warning $n-$p)
+	./lcount.sh
