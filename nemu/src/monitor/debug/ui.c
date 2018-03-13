@@ -177,10 +177,10 @@ static int cmd_x(char *args){
 	printf(c_bold "addr\t\t" c_yellow "Big-Endian\t\t" c_cyan "Little-Endian\n" c_normal);
 	for(i = 0;i < N; ++i){
 		uint32_t data = vaddr_read(Addr + i*4, 4);
-		printf(c_cyan c_bold "0x%08x: " c_normal, Addr + i*4);
-		printf(c_yellow "0x%08x" c_normal, data);
+		printf(c_bold "0x%08x: " c_normal, Addr + i*4);
+		printf(c_yellow "0x%08x\t\t" c_normal, data);
 		for(int j=0; j<4;++j){
-			printf(c_bold "0x%02x " c_normal, data & 0xff);
+			printf(c_bold c_cyan "0x%02x " c_normal, data & 0xff);
 			data = data >> 8;
 		}
 		printf("\n");
