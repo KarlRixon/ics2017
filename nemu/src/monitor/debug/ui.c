@@ -218,6 +218,7 @@ static int cmd_w(char *args){
 //	printf("b = %s\texp = %s\n", b, exp);
 	bk = strcmp(b, "-b") == 0 ? true:false;
 	if(strcmp(b, "-b") != 0 && strcmp(b, "-w") != 0){
+		printf(c_red c_bold "parameter error\n" c_normal);
 		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[7].name, cmd_table[7].description);
 		return 0;
 	}
