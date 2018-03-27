@@ -25,7 +25,7 @@ void init_wp_pool() {
 
 void show_wp(){
 	WP *p=head;
-	printf(c_yellow c_bold "NO\t\t" c_yellow "type\t\t" c_blue "str\t\t" c_purple "oldvalue\t\t" c_cyan "value\n" c_normal);
+	printf(c_yellow c_bold "NO\t\t" c_yellow "type\t\t" c_blue "str\t\t" c_purple "oldvalue\t\t\t" c_cyan "value\n" c_normal);
 	while(p){
 		printf(c_bold "wp[%d]\t\t" c_yellow "%s\t\t" c_blue "%s\t\t" c_purple "%d | 0x%x\t\t" c_cyan "%d | 0x%x\n" c_normal, p->NO, p->breakpoint ? "b":"w", p->str, p->oldvalue, p->oldvalue, p->value, p->value);
 		p = p->next;
