@@ -69,6 +69,7 @@ void free_wp(int no){
 		printf(c_blue c_bold "deleted a watchpoint: %s = %d | %x\n" c_normal, p->str, p->value, p->value);
 		memset(p->str, 0, sizeof(p->str)-1);
 		p->oldvalue = p->value = 0;
+		p->breakpoint = false;
 		
 		head = p->next;
 		p->next = free_;
