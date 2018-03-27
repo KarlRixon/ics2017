@@ -32,7 +32,7 @@ void show_wp(){
 	}
 }
 
-void new_wp(char *str, int value){
+void new_wp(char *str, int value, bool b){
 	if(free_ == NULL){
 		printf(c_red c_bold "too many watchpoints\ntry to change NR_WP\n" c_normal);
 		assert(0);
@@ -44,6 +44,10 @@ void new_wp(char *str, int value){
 	n->oldvalue = n->value = value;
 	strcpy(n->str, str);
 	n->next = NULL;
+	if(b == true)
+		n->breakpoint = true;
+	else if(b == false)
+		n->breakpoint = false;
 
 	if(head == NULL){
 		head = n;

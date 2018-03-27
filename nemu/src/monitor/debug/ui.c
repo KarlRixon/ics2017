@@ -66,7 +66,7 @@ static struct {
   { "info", "[r]: print register state. [w]: print monitoring point information", cmd_info },
   { "x", "calculate the value of the expression EXPR, using the result as the starting memory address and outputting a contiguous N 4 bytes in hexadecimal form", cmd_x },
   { "p", "the value of the EXPR is calculated, and the operation of the EXPR supports the expression evaluation section in the  debug", cmd_p },
-  { "w", "[-b] add breakpoint function [-w] no breakpoint function. When the value of the expression EXPR changes, the execution of the program is suspended", cmd_w },
+  { "w", "when the value of the expression EXPR changes, the execution of the program is suspended", cmd_w },
   { "d", "delete a monitoring point with an ordinal number N", cmd_d },
 
 };
@@ -212,19 +212,23 @@ static int cmd_w(char *args){
 		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[7].name, cmd_table[7].description);
 		return 0;
 	}
-	else{
-		bool success;
-		uint32_t result = expr(args, &success);
-		
-		if(success){
-			new_wp(args, result);
-			printf(c_green c_bold "added a watchpoint: %s = %d | 0x%x\n" c_normal, args, result, result);
-		}
-		else{
-			printf(c_red c_bold "error in calculating EXPR\n" c_normal);
-		}
-		return 0;
+	char *b = strtok(NULL, " ");
+	char *exp = strtok(NULL, " ");
+	bool bk = false;
+//	printf("b = %s\texp = %s\n", b, exp);
+	bk = strcmp(b, "-b") == 0 ? true:false;
+
+	bool success;
+	uint32_t result = expr(exp, &success);
+
+	if(success){
+		new_wp(args, result, bk);
+		printf(c_green c_bold "added a watchpoint: %s = %d | 0x%x\n" c_normal, args, result, result);
 	}
+	else{
+		printf(c_red c_bold "error in calculating EXPR\n" c_normal);
+	}
+	return 0;
 }
 
 static int cmd_d(char *args){
