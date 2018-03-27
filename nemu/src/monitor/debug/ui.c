@@ -227,7 +227,7 @@ static int cmd_w(char *args){
 	uint32_t result = expr(exp, &success);
 
 	if(success){
-		new_wp(args, result, bk);
+		new_wp(exp, result, bk);
 		printf(c_green c_bold "added a watchpoint: %s = %d | 0x%x\n" c_normal, args, result, result);
 	}
 	else{
