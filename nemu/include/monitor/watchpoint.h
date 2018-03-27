@@ -12,7 +12,7 @@ typedef struct watchpoint {
   char str[32];
   int value;
   int oldvalue;
-
+  bool breakpoint;
 } WP;
 
 void show_wp();

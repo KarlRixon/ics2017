@@ -34,7 +34,7 @@ void cpu_exec(uint64_t n) {
 	WP *t = check_wp(NULL);
 	while(t != NULL){
 		printf(c_yellow "wp[%d] changed: %s = %d | %x\t\toldvalue = %d | %x\n" c_normal,t->NO, t->str, t->value, t->value, t->oldvalue, t->oldvalue);
-		if(nemu_state != NEMU_END)
+		if(nemu_state != NEMU_END && t->breakpoint == true)
 			nemu_state = NEMU_STOP;
 		t = check_wp(t);
 	}
