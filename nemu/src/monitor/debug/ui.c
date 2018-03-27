@@ -66,7 +66,7 @@ static struct {
   { "info", "[r]: print register state. [w]: print monitoring point information", cmd_info },
   { "x", "calculate the value of the expression EXPR, using the result as the starting memory address and outputting a contiguous N 4 bytes in hexadecimal form", cmd_x },
   { "p", "the value of the EXPR is calculated, and the operation of the EXPR supports the expression evaluation section in the  debug", cmd_p },
-  { "w", "when the value of the expression EXPR changes, the execution of the program is suspended", cmd_w },
+  { "w", "[-b] add breakpoint function [-w] no breakpoint function. When the value of the expression EXPR changes, the execution of the program is suspended", cmd_w },
   { "d", "delete a monitoring point with an ordinal number N", cmd_d },
 
 };
