@@ -51,6 +51,8 @@ static int cmd_w(char *args);
 
 static int cmd_d(char *args);
 
+static int cmd_clear(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -66,12 +68,18 @@ static struct {
   { "info", "[r]: print register state. [w]: print monitoring point information", cmd_info },
   { "x", "calculate the value of the expression EXPR, using the result as the starting memory address and outputting a contiguous N 4 bytes in hexadecimal form", cmd_x },
   { "p", "the value of the EXPR is calculated, and the operation of the EXPR supports the expression evaluation section in the  debug", cmd_p },
-  { "w", "when the value of the expression EXPR changes, the execution of the program is suspended", cmd_w },
+  { "w", "[-b] add breakpoint function [-w] no breakpoint function. When the value of the expression EXPR changes, the execution of the program is suspended", cmd_w },
   { "d", "delete a monitoring point with an ordinal number N", cmd_d },
+  { "clear", "clear screen", cmd_clear },
 
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
+
+static int cmd_clear(char *args){
+	system("clear");
+	return 0;
+}
 
 static int cmd_help(char *args) {
   /* extract the first argument */
@@ -116,16 +124,16 @@ static int cmd_info(char *args){
 		return 1;
 	}
 	if(strcmp(args,"r") == 0){
-		printf(c_bold c_yellow "reg		hex\n" c_normal);
-		printf(c_bold "EAX		0x%08x\n", cpu.eax);
-		printf("ECX		0x%08x\n", cpu.ecx);
-		printf("EDX		0x%08x\n", cpu.edx);
-		printf("EBX		0x%08x\n", cpu.ebx);
-		printf("ESP		0x%08x\n", cpu.esp);
-		printf("EBP		0x%08x\n", cpu.ebp);
-		printf("ESI		0x%08x\n", cpu.esi);
-		printf("EDI		0x%08x\n", cpu.edi);
-		printf("EIP		0x%08x\n" c_normal, cpu.eip);
+		printf(c_bold c_yellow "reg		hex\t\tdec\n" c_normal);
+		printf(c_bold "EAX		0x%08x | %d\n", cpu.eax, cpu.eax);
+		printf("ECX		0x%08x | %d\n", cpu.ecx, cpu.ecx);
+		printf("EDX		0x%08x | %d\n", cpu.edx, cpu.edx);
+		printf("EBX		0x%08x | %d\n", cpu.ebx, cpu.ebx);
+		printf("ESP		0x%08x | %d\n", cpu.esp, cpu.esp);
+		printf("EBP		0x%08x | %d\n", cpu.ebp, cpu.ebp);
+		printf("ESI		0x%08x | %d\n", cpu.esi, cpu.esi);
+		printf("EDI		0x%08x | %d\n", cpu.edi, cpu.edi);
+		printf("EIP		0x%08x | %d\n" c_normal, cpu.eip, cpu.eip);
 	}
 	else if(strcmp(args,"w") == 0){
 		show_wp();
@@ -174,11 +182,13 @@ static int cmd_x(char *args){
 	//	}
 	//	printf("\n");
 	//}
+	printf(c_bold "addr\t\t" c_yellow "Big-Endian\t\t" c_cyan "Little-Endian\n" c_normal);
 	for(i = 0;i < N; ++i){
 		uint32_t data = vaddr_read(Addr + i*4, 4);
-		printf(c_cyan c_bold "0x%08x: " c_normal,Addr + i*4);
+		printf(c_bold "0x%08x:\t" c_normal, Addr + i*4);
+		printf(c_yellow "0x%08x\t\t" c_normal, data);
 		for(int j=0; j<4;++j){
-			printf(c_bold "0x%02x " c_normal, data & 0xff);
+			printf(c_bold c_cyan "0x%02x " c_normal, data & 0xff);
 			data = data >> 8;
 		}
 		printf("\n");
@@ -210,19 +220,33 @@ static int cmd_w(char *args){
 		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[7].name, cmd_table[7].description);
 		return 0;
 	}
-	else{
-		bool success;
-		uint32_t result = expr(args, &success);
-		
-		if(success){
-			new_wp(args, result);
-			printf(c_green c_bold "added a watchpoint: %s = %d | 0x%x\n" c_normal, args, result, result);
-		}
-		else{
-			printf(c_red c_bold "error in calculating EXPR\n" c_normal);
-		}
+	char *b = strtok(NULL, " ");
+	char *exp = strtok(NULL, " ");
+	bool bk = false;
+//	printf("b = %s\texp = %s\n", b, exp);
+	bk = strcmp(b, "-b") == 0 ? true:false;
+	if(strcmp(b, "-b") != 0 && strcmp(b, "-w") != 0){
+		printf(c_red c_bold "parameter error\n" c_normal);
+		printf(c_green c_bold "%s - %s\n" c_normal,cmd_table[7].name, cmd_table[7].description);
 		return 0;
 	}
+
+	bool success;
+	uint32_t result = expr(exp, &success);
+
+	if(success){
+		new_wp(exp, result, bk);
+		if(!bk){
+			printf(c_green c_bold "added a watchpoint: %s = %d | 0x%x\n" c_normal, exp, result, result);
+		}
+		else{
+		printf(c_green c_bold "added a breakpoint: %s = %d | 0x%x\n" c_normal, exp, result, result);
+		}
+	}
+	else{
+		printf(c_red c_bold "error in calculating EXPR\n" c_normal);
+	}
+	return 0;
 }
 
 static int cmd_d(char *args){

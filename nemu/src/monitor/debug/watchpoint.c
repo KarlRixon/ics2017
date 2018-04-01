@@ -25,14 +25,14 @@ void init_wp_pool() {
 
 void show_wp(){
 	WP *p=head;
-	printf(c_yellow c_bold "NO\t\t" c_blue "str\t\t" c_cyan "value\n" c_normal);
+	printf(c_yellow c_bold "NO\t\t" c_yellow "type\t\t" c_blue "str\t\t" c_purple "oldvalue\t\t\t" c_cyan "value\n" c_normal);
 	while(p){
-		printf(c_bold "wp[%d]\t\t" c_blue "%s\t\t" c_cyan "%d | 0x%x\n" c_normal, p->NO, p->str, p->value, p->value);
+		printf(c_bold "wp[%d]\t\t" c_yellow "%s\t\t" c_blue "%s\t\t" c_purple "%d | 0x%x\t\t" c_cyan "%d | 0x%x\n" c_normal, p->NO, p->breakpoint ? "b":"w", p->str, p->oldvalue, p->oldvalue, p->value, p->value);
 		p = p->next;
 	}
 }
 
-void new_wp(char *str, int value){
+void new_wp(char *str, int value, bool b){
 	if(free_ == NULL){
 		printf(c_red c_bold "too many watchpoints\ntry to change NR_WP\n" c_normal);
 		assert(0);
@@ -41,9 +41,13 @@ void new_wp(char *str, int value){
 	n = free_;
 	free_ = free_->next;
 
-	n->value = value;
+	n->oldvalue = n->value = value;
 	strcpy(n->str, str);
 	n->next = NULL;
+	if(b == true)
+		n->breakpoint = true;
+	else if(b == false)
+		n->breakpoint = false;
 
 	if(head == NULL){
 		head = n;
@@ -64,7 +68,8 @@ void free_wp(int no){
 	else if(p->NO == no){
 		printf(c_blue c_bold "deleted a watchpoint: %s = %d | %x\n" c_normal, p->str, p->value, p->value);
 		memset(p->str, 0, sizeof(p->str)-1);
-		p->value = 0;
+		p->oldvalue = p->value = 0;
+		p->breakpoint = false;
 		
 		head = p->next;
 		p->next = free_;
@@ -78,7 +83,7 @@ void free_wp(int no){
 			if(p->NO == no){
 				printf(c_blue c_bold "deleted a watchpoint: %s = %d | %x\n" c_normal, p->str, p->value, p->value);
 				memset(p->str, 0, sizeof(p->str)-1);
-				p->value = 0;
+				p->oldvalue = p->value = 0;
 
 				q->next = p->next;
 				p->next = free_;
@@ -107,6 +112,7 @@ WP* check_wp(WP *w){
 			assert(0);
 		}
 		else if(result != w->value){
+			w->oldvalue = w->value;
 			w->value = result;
 			return w;
 		}
