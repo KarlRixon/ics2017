@@ -228,7 +228,12 @@ static int cmd_w(char *args){
 
 	if(success){
 		new_wp(exp, result, bk);
-		printf(c_green c_bold "added a watchpoint: %s = %d | 0x%x\n" c_normal, exp, result, result);
+		if(!bk){
+			printf(c_green c_bold "added a watchpoint: %s = %d | 0x%x\n" c_normal, exp, result, result);
+		}
+		else{
+		printf(c_green c_bold "added a breakpoint: %s = %d | 0x%x\n" c_normal, exp, result, result);
+		}
 	}
 	else{
 		printf(c_red c_bold "error in calculating EXPR\n" c_normal);
