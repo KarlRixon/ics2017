@@ -51,6 +51,8 @@ static int cmd_w(char *args);
 
 static int cmd_d(char *args);
 
+static int cmd_clear(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -68,10 +70,16 @@ static struct {
   { "p", "the value of the EXPR is calculated, and the operation of the EXPR supports the expression evaluation section in the  debug", cmd_p },
   { "w", "[-b] add breakpoint function [-w] no breakpoint function. When the value of the expression EXPR changes, the execution of the program is suspended", cmd_w },
   { "d", "delete a monitoring point with an ordinal number N", cmd_d },
+  { "clear", "clear screen", cmd_clear },
 
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
+
+static int cmd_clear(char *args){
+	system("cls");
+	return 0;
+}
 
 static int cmd_help(char *args) {
   /* extract the first argument */
