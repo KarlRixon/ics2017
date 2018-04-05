@@ -31,16 +31,20 @@ typedef struct {
 			rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
 		};
 	};
-	struct{
-		rtlreg_t CF:1;
-		rtlreg_t :5;
-		rtlreg_t ZF:1;
-		rtlreg_t SF:1;
-		rtlreg_t :1;
-		rtlreg_t IF:1;
-		rtlreg_t :1;
-		rtlreg_t OF:1;
-	}EFLAGS;
+	union{
+		struct{
+			rtlreg_t CF:1;
+			rtlreg_t :5;
+			rtlreg_t ZF:1;
+			rtlreg_t SF:1;
+			rtlreg_t :1;
+			rtlreg_t IF:1;
+			rtlreg_t :1;
+			rtlreg_t OF:1;
+			rtlreg_t :20;
+		};
+		rtlreg_t eflags;
+	};
 	vaddr_t eip;
 } CPU_state;
 
