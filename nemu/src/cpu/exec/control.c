@@ -27,7 +27,7 @@ make_EHelper(call) {
   // the target address is calculated at the decode stage
   // TODO();
 
-  rtl_push(&decoding.seq_eip);
+  rtl_push(&decoding.seq_eip, id_dest->width);
   decoding.is_jmp = 1;
   decoding.jmp_eip = decoding.seq_eip + id_dest->val;
 
