@@ -37,8 +37,8 @@ make_EHelper(call) {
 make_EHelper(ret) {
   // TODO();
 
-  printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n)", id_src->val, id_src2->val, id_dest->val);
-
+  // printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n)", id_src->val, id_src2->val, id_dest->val);
+  rtl_pop(&cpu.eip);
   print_asm("ret");
 }
 
