@@ -8,18 +8,15 @@ make_EHelper(add) {
 
 make_EHelper(sub) {
   // TODO();
+
   // printf("src->val = 0x%08x\tsrc->width = %d\n", id_src->val, id_src->width);
   if(id_src->width == 1 && id_dest->width != 1){
 	  // id_src->val = 0xf8;
 	  rtl_sext(&id_src->val, &id_src->val, id_src->width);
 	  id_src->width = id_dest->width;
   }
-  if (id_dest->type == OP_TYPE_MEM)
-	  rtl_sub(guest_to_host(id_dest->addr), &id_dest->val, &id_src->val);
-  else if (id_dest->type == OP_TYPE_REG){
-	  rtl_sub(&t0, &id_dest->val, &id_src->val);
-	  rtl_sr(id_dest->reg, id_dest->width, &t0);	
-  }
+  rtl_sub(&t0, &id_dest->val, &id_src->val);
+  operand_write(id_dest, &t0);
   // printf("src->val = 0x%08x\tsrc->width = %d\n", id_src->val, id_src->width);
 
   print_asm_template2(sub);
