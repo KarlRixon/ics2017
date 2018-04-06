@@ -9,7 +9,6 @@ make_EHelper(push) {
   // TODO();
 
   // printf("id_dest->val = %d | 0x%x\tid_dest->str = %s\n", id_dest->val, id_dest->val, id_dest->str);
-  cpu.ebp = 0xff;
   rtl_push(&id_dest->val, id_dest->width);
 
   print_asm_template1(push);
@@ -18,10 +17,10 @@ make_EHelper(push) {
 make_EHelper(pop) {
   // TODO();
 
-  printf("t2 = %d | 0x%x\n", t2, t2);
+  // printf("t2 = %d | 0x%x\n", t2, t2);
   rtl_pop(&t2);
   operand_write(id_dest, &t2);
-  printf("t2 = %d | 0x%x\n", t2, t2);
+  // printf("t2 = %d | 0x%x\n", t2, t2);
 
   print_asm_template1(pop);
 }
