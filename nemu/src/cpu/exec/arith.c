@@ -11,10 +11,10 @@ make_EHelper(sub) {
   printf("src->val = 0x%08x\tsrc->width = %d\n", id_src->val, id_src->width);
   if(id_src->width == 1 && id_dest->width != 1){
 	  id_src->val = 0xf8;
-	  rtl_sext(&id_src->val, &id_src->val, id_dest->width);
+	  rtl_sext(&t0, &id_src->val, id_dest->width);
 	  id_src->width = id_dest->width;
   }
-  printf("src->val = 0x%08x\tsrc->width = %d\n", id_src->val, id_src->width);
+  printf("src->val = 0x%08x\tsrc->width = %d\n", t0, id_src->width);
 
   print_asm_template2(sub);
 }
