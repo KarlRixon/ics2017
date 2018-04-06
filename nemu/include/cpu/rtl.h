@@ -12,16 +12,16 @@ static inline void rtl_li(rtlreg_t* dest, uint32_t imm) {
   *dest = imm;
 }
 
-#define c_add(a, b) ((a) + (b))
-#define c_sub(a, b) ((a) - (b))
-#define c_and(a, b) ((a) & (b))
-#define c_or(a, b)  ((a) | (b))
-#define c_xor(a, b) ((a) ^ (b))
-#define c_shl(a, b) ((a) << (b))
-#define c_shr(a, b) ((a) >> (b))
-#define c_sar(a, b) ((int32_t)(a) >> (b))
-#define c_slt(a, b) ((int32_t)(a) < (int32_t)(b))
-#define c_sltu(a, b) ((a) < (b))
+#define c_add(a, b) ((a) + (b))				// 加
+#define c_sub(a, b) ((a) - (b))				// 减
+#define c_and(a, b) ((a) & (b))				// 按位与
+#define c_or(a, b)  ((a) | (b))				// 按位或
+#define c_xor(a, b) ((a) ^ (b))				// 按位异或
+#define c_shl(a, b) ((a) << (b))			// 逻辑左移
+#define c_shr(a, b) ((a) >> (b))			// 逻辑右移
+#define c_sar(a, b) ((int32_t)(a) >> (b))	// 算术右移
+#define c_slt(a, b) ((int32_t)(a) < (int32_t)(b))	// 小于
+#define c_sltu(a, b) ((a) < (b))			// 无符号小于
 
 #define make_rtl_arith_logic(name) \
   static inline void concat(rtl_, name) (rtlreg_t* dest, const rtlreg_t* src1, const rtlreg_t* src2) { \
@@ -136,19 +136,25 @@ static inline void rtl_not(rtlreg_t* dest) {
 
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
-  TODO();
+  // TODO();
+  // printf("0x%08x << 4 = 0x%08x\n", *src1, c_shl(*src1, 8));
+  *dest = c_sar(c_shl(*src1, (4 - width) * 8), (4 - width) * 8);
 }
 
-static inline void rtl_push(const rtlreg_t* src1) {
+static inline void rtl_push(const rtlreg_t* src1, int width) {
   // esp <- esp - 4
   // M[esp] <- src1
-  TODO();
+  // TODO();
+  cpu.esp -= width;
+  rtl_sm(&cpu.esp, width, src1);
 }
 
 static inline void rtl_pop(rtlreg_t* dest) {
   // dest <- M[esp]
   // esp <- esp + 4
-  TODO();
+  // TODO();
+  rtl_lm(dest, &cpu.esp, 4);
+  cpu.esp += 4;
 }
 
 static inline void rtl_eq0(rtlreg_t* dest, const rtlreg_t* src1) {
