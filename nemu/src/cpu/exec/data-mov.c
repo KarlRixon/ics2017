@@ -9,6 +9,7 @@ make_EHelper(push) {
   // TODO();
 
   // printf("id_dest->val = %d | 0x%x\tid_dest->str = %s\n", id_dest->val, id_dest->val, id_dest->str);
+  cpu.ebp = 0xff;
   rtl_push(&id_dest->val, id_dest->width);
 
   print_asm_template1(push);
