@@ -25,9 +25,8 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
 		break;
     case CC_E:
 		rtl_get_ZF(dest);
-		*dest = 1;
 		printf("ZF = %d\n", *dest);
-		// printf("t0 = 0x%04x\tdest = 0x%04x\n", t0, *dest);
+		printf("t0 = 0x%04x\tdest = 0x%04x\n", t0, *dest);
 		break;
     case CC_BE:
 		rtl_get_CF(&t0);
