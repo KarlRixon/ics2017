@@ -160,7 +160,7 @@ void difftest_step(uint32_t eip) {
 	  if(r.edx != cpu.edx) printf(c_bold c_yellow "edx" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.edx, cpu.edx);
 	  if(r.ebx != cpu.ebx) printf(c_bold c_yellow "ebx" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.ebx, cpu.ebx);
 	  if(r.esp != cpu.esp) printf(c_bold c_yellow "esp" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.esp, cpu.esp);
-	  if(r.ebp == cpu.ebp) printf(c_bold c_yellow "ebp" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.ebp, cpu.ebp);
+	  if(r.ebp != cpu.ebp) printf(c_bold c_yellow "ebp" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.ebp, cpu.ebp);
 	  if(r.esi != cpu.esi) printf(c_bold c_yellow "esi" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.esi, cpu.esi);
 	  if(r.edi != cpu.edi) printf(c_bold c_yellow "edi" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.edi, cpu.edi);
 	  if(r.eip != cpu.eip) printf(c_bold c_yellow "eip" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.eip, cpu.eip);
