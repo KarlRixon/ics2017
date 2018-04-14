@@ -181,13 +181,18 @@ static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
   // TODO();
-  t0 = *result == 0;
+  t0 = (*result == 0);
   rtl_set_ZF(&t0);
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
-  TODO();
+  // TODO();
+  t1 = width*4-1;
+  rtl_shl(&t0, result, &t1);
+  rtl_shr(&t0, &t0, &t1);
+  printf("t0 = %dt1 = %d\n", t0, t1);
+  rtl_set_ZF(&t0);
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
