@@ -132,7 +132,8 @@ static inline void rtl_mv(rtlreg_t* dest, const rtlreg_t *src1) {
 
 static inline void rtl_not(rtlreg_t* dest) {
   // dest <- ~dest
-  TODO();
+  // TODO();
+  *dest = ~(*dest);
 }
 
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
@@ -188,10 +189,7 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
   // TODO();
-  t1 = width*4-1;
-  rtl_shl(&t0, result, &t1);
-  rtl_shr(&t0, &t0, &t1);
-  printf("t0 = %d\tt1 = %d\tresult = %d 0x%08x\n", t0, t1, *result, *result);
+  t0 = c_shr(*result, width*8-1);
   rtl_set_ZF(&t0);
 }
 
