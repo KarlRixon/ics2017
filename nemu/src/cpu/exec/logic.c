@@ -71,9 +71,9 @@ make_EHelper(shr) {
 
 make_EHelper(setcc) {
   uint8_t subcode = decoding.opcode & 0xf;
+  printf("eflags = 0x%08x\n", cpu.eflags);
   rtl_setcc(&t2, subcode);
   operand_write(id_dest, &t2);
-  printf("eflags = 0x%08x\n", cpu.eflags);
   print_asm("set%s %s", get_cc_name(subcode), id_dest->str);
 }
 
