@@ -19,6 +19,7 @@ make_EHelper(and) {
   operand_write(id_dest, &t0);
   cpu.OF = 0;
   cpu.CF = 0;
+  rtl_update_ZFSF(&t0, id_dest->width);
   // printf("t0 = 0x%08x\tsrc1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", t0, id_src->val, id_src2->val, id_dest->val);
   print_asm_template2(and);
 }
@@ -31,6 +32,7 @@ make_EHelper(xor) {
   operand_write(id_dest, &t0);
   cpu.OF = 0;
   cpu.CF = 0;
+  rtl_update_ZFSF(&t0, id_dest->width);
   // printf("t0 = 0x%08x\tsrc1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", t0, id_src->val, id_src2->val, id_dest->val);
   print_asm_template2(xor);
 }
@@ -42,6 +44,7 @@ make_EHelper(or) {
   operand_write(id_dest, &t0);
   cpu.OF = 0;
   cpu.CF = 0;
+  rtl_update_ZFSF(&t0, id_dest->width);
   print_asm_template2(or);
 }
 

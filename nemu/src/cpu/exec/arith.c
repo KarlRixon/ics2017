@@ -38,7 +38,8 @@ make_EHelper(cmp) {
   // TODO();
 
   
-  printf("src->val = 0x%08x\tsrc2->val = 0x%08x\tdest->val = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
+  printf("src->width = %d\tsrc2->width = %d\tdest->width = %d\n", id_src->width, id_src2->width, id_dest->width);
+  // printf("src->val = 0x%08x\tsrc2->val = 0x%08x\tdest->val = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
   print_asm_template2(cmp);
 }
 
