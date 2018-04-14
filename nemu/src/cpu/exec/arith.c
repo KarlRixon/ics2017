@@ -53,6 +53,7 @@ make_EHelper(cmp) {
   if((id_src->val <= 0 && id_dest->val < 0 && t0 < 0) || (id_src->val < 0 && id_dest->val >= 0 && t0 >= 0)) cpu.OF = 1;
   else cpu.OF = 0;
   cpu.CF = t0 > id_dest->val?1:0;
+  rtl_update_ZFSF(&t0, id_dest->width);
   print_asm_template2(cmp);
 }
 
