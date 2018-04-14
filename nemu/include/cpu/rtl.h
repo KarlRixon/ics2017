@@ -191,7 +191,7 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   t1 = width*4-1;
   rtl_shl(&t0, result, &t1);
   rtl_shr(&t0, &t0, &t1);
-  printf("t0 = %d\tt1 = %d\n", t0, t1);
+  printf("t0 = %d\tt1 = %dresult = %d 0x%08x\n", t0, t1, *result, *result);
   rtl_set_ZF(&t0);
 }
 
