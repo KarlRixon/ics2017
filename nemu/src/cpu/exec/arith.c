@@ -1,7 +1,17 @@
 #include "cpu/exec.h"
 
 make_EHelper(add) {
-  TODO();
+  // TODO();
+
+  printf("src->width = %d\tdest->width = %d\n", id_src->width, id_dest->width);
+  printf("src->val = 0x%08x\tsrc->width = %d\n", id_src->val, id_src->width);
+  if(id_src->width == 1 && id_dest->width != 1){
+	  rtl_sext(&id_src->val, &id_src->val, id_src->width);
+	  id_src->width = id_dest->width;
+  }
+  rtl_add(&t0, &id_dest->val, &id_src->val);
+  operand_write(id_dest, &t0);
+  printf("src->val = 0x%08x\tsrc->width = %d\n", id_src->val, id_src->width);
 
   print_asm_template2(add);
 }
