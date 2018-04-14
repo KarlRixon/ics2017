@@ -9,6 +9,7 @@ make_EHelper(test) {
 make_EHelper(and) {
   // TODO();
   
+  printf("src1->width = 0x%08x\n", id_src->width);
   printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
   rtl_and(&t0, &id_src->val, &id_dest->val);
   operand_write(id_dest, &t0);
