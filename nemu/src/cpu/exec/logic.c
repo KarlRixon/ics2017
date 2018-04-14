@@ -17,6 +17,8 @@ make_EHelper(and) {
   }
   rtl_and(&t0, &id_src->val, &id_dest->val);
   operand_write(id_dest, &t0);
+  cpu.OF = 0;
+  cpu.CF = 0;
   // printf("t0 = 0x%08x\tsrc1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", t0, id_src->val, id_src2->val, id_dest->val);
   print_asm_template2(and);
 }
@@ -64,7 +66,7 @@ make_EHelper(setcc) {
   uint8_t subcode = decoding.opcode & 0xf;
   rtl_setcc(&t2, subcode);
   operand_write(id_dest, &t2);
-  printf("dest->addr = 0x%08x\n", id_dest->addr);
+  
   print_asm("set%s %s", get_cc_name(subcode), id_dest->str);
 }
 

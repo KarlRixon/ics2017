@@ -11,6 +11,8 @@ make_EHelper(add) {
   }
   rtl_add(&t0, &id_dest->val, &id_src->val);
   operand_write(id_dest, &t0);
+  rtl_update_ZFSF(&t0, id_dest->width);
+
 
   print_asm_template2(add);
 }
@@ -26,6 +28,7 @@ make_EHelper(sub) {
   }
   rtl_sub(&t0, &id_dest->val, &id_src->val);
   operand_write(id_dest, &t0);
+  rtl_update_ZFSF(&t0, id_dest->width);
   // printf("src->val = 0x%08x\tsrc->width = %d\n", id_src->val, id_src->width);
 
   print_asm_template2(sub);
