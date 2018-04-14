@@ -9,15 +9,15 @@ make_EHelper(test) {
 make_EHelper(and) {
   // TODO();
   
-  printf("src1->width = %d\tdest->width = %d\n", id_src->width, id_dest->width);
-  printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
+  // printf("src1->width = %d\tdest->width = %d\n", id_src->width, id_dest->width);
+  // printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
   if(id_src->width == 1 && id_dest->width != 1){
 	  rtl_sext(&id_src->val, &id_src->val, id_src->width);
 	  id_src->width = 4;
   }
   rtl_and(&t0, &id_src->val, &id_dest->val);
   operand_write(id_dest, &t0);
-  printf("t0 = 0x%08x\tsrc1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", t0, id_src->val, id_src2->val, id_dest->val);
+  // printf("t0 = 0x%08x\tsrc1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", t0, id_src->val, id_src2->val, id_dest->val);
   print_asm_template2(and);
 }
 
