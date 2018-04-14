@@ -3,8 +3,8 @@
 make_EHelper(add) {
   // TODO();
 
-  printf("src->width = %d\tsrc2->width = %d\tdest->width = %d\n", id_src->width, id_src2->width, id_dest->width);
-  printf("src->val = 0x%08x\tsrc2->val = 0x%08x\tdest->val = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
+  // printf("src->width = %d\tsrc2->width = %d\tdest->width = %d\n", id_src->width, id_src2->width, id_dest->width);
+  // printf("src->val = 0x%08x\tsrc2->val = 0x%08x\tdest->val = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
   if(id_src->width == 1 && id_dest->width != 1){
 	  rtl_sext(&id_src->val, &id_src->val, id_src->width);
 	  id_src->width = id_dest->width;
