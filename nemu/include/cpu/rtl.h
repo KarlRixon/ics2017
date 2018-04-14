@@ -114,11 +114,11 @@ static inline void rtl_sr(int r, int width, const rtlreg_t* src1) {
 #define make_rtl_setget_eflags(f) \
   static inline void concat(rtl_set_, f) (const rtlreg_t* src) { \
     cpu.f = *src; \
-	printf("cpu.f = %d\tcpu.ZF = %d\n", cpu.f, cpu.ZF); \
+	printf("s cpu.f = %d\tcpu.ZF = %d\n", cpu.f, cpu.ZF); \
   } \
   static inline void concat(rtl_get_, f) (rtlreg_t* dest) { \
     *dest = cpu.f; \
-	printf("cpu.f = %d\tcpu.ZF = %d\n", cpu.f, cpu.ZF); \
+	printf("g cpu.f = %d\tcpu.ZF = %d\n", cpu.f, cpu.ZF); \
   }
 
 make_rtl_setget_eflags(CF)
