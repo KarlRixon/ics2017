@@ -185,6 +185,7 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // TODO();
   t0 = (*result == 0);
   rtl_set_ZF(&t0);
+  printf("t0 = %d\n", t0);
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
