@@ -55,7 +55,7 @@ make_EHelper(cmp) {
 	else cpu.OF = 0;
 	cpu.CF = t0 > id_dest->val?1:0;
 	rtl_update_ZFSF(&t0, id_dest->width);
-	printf("cpu.ZF = %d\n", cpu.ZF);
+	// printf("cpu.ZF = %d\n", cpu.ZF);
 	print_asm_template2(cmp);
 }
 
