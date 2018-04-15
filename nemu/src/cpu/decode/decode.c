@@ -133,6 +133,15 @@ make_DHelper(lea_M2G) {
   decode_op_rm(eip, id_src, false, id_dest, false);
 }
 
+// newly add
+make_DHelper(movzx_E2G) {
+  if(decoding.opcode & 0x1)
+	  id_src->width = 2;
+  else
+	  id_src->width = 1;
+  decode_op_rm(eip, id_src, true, id_dest, false);
+}
+
 /* AL <- Ib
  * eAX <- Iv
  */
