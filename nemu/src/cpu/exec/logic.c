@@ -94,7 +94,6 @@ make_EHelper(setcc) {
 	else assert(0);
 	t0 += t2;
 	operand_write(id_dest, &t0);
-	if(id_dest->type == OP_TYPE_MEM)
 	printf("t0 = 0x%08x\tt2 = 0x%80x\tsrc1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", t0, t2, id_src->val, id_src2->val, id_dest->val);
 	print_asm("set%s %s", get_cc_name(subcode), id_dest->str);
 }
