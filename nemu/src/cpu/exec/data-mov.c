@@ -76,6 +76,7 @@ make_EHelper(movsx) {
 make_EHelper(movzx) {
   //id_dest->width = decoding.is_operand_size_16 ? 2 : 4;
   printf("src1->width = %d\tsrc2->width = %d\tdest->width = %d\n", id_src->width, id_src2->width, id_dest->width);
+  printf("src1->str = %s\tsrc2->str = %s\tdest->str = %s\n", id_src->str, id_src2->str, id_dest->str);
   printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
   operand_write(id_dest, &id_src->val);
   print_asm_template2(movzx);
