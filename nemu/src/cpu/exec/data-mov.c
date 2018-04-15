@@ -9,7 +9,7 @@ make_EHelper(push) {
   // TODO();
 
   printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
-  printf("id_dest->val = %d | 0x%x\tid_dest->str = %s\n", id_dest->val, id_dest->val, id_dest->str);
+  printf("id_dest->width = %d\tid_dest->str = %s\n", id_dest->width, id_dest->str);
   rtl_sext(&t2, &id_src->val, id_src->width);
   rtl_push(&id_dest->val, id_dest->width);
 
