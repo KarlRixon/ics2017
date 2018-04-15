@@ -8,8 +8,9 @@ make_EHelper(mov) {
 make_EHelper(push) {
   // TODO();
 
-  // printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
-  // printf("id_dest->val = %d | 0x%x\tid_dest->str = %s\n", id_dest->val, id_dest->val, id_dest->str);
+  printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
+  printf("id_dest->val = %d | 0x%x\tid_dest->str = %s\n", id_dest->val, id_dest->val, id_dest->str);
+  rtl_sext(&t2, &id_src->val, id_src->width);
   rtl_push(&id_dest->val, id_dest->width);
 
   print_asm_template1(push);
@@ -78,7 +79,7 @@ make_EHelper(movzx) {
   printf("src1->width = %d\tsrc2->width = %d\tdest->width = %d\n", id_src->width, id_src2->width, id_dest->width);
   printf("src1->str = %s\tsrc2->str = %s\tdest->str = %s\n", id_src->str, id_src2->str, id_dest->str);
   printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
-
+  
   operand_write(id_dest, &id_src->val);
   print_asm_template2(movzx);
 }
