@@ -28,7 +28,10 @@ make_EHelper(and) {
 	  id_src->width = 4;
   }
   if(id_dest->type == OP_TYPE_REG) rtl_and(&t0, &id_src->val, &id_dest->val);
-  else if(id_dest->type == OP_TYPE_MEM) rtl_and(&t0, &id_src->reg, &id_dest->reg);
+  else if(id_dest->type == OP_TYPE_MEM) t0 = id_dest->reg;
+  if(id_src->type == OP_TYPE_REG) t1 = id_src->val;
+  else if(id_src->type == OP_TYPE_MEM) t1 = id_src->reg;
+  rtl_and(&t0, &t0, &t1);
   operand_write(id_dest, &t0);
   rtl_set_OF(&tzero);
   rtl_set_CF(&tzero);
