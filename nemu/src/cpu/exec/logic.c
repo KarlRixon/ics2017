@@ -76,8 +76,10 @@ make_EHelper(sar) {
 make_EHelper(shl) {
   // TODO();
   // unnecessary to update CF and OF in NEMU
-  printf("src1->width = %d\tdest->width = %ddest->type = %d\n", id_src->width, id_dest->width, id_dest->type);
+  printf("src1->type = %d\tdest->width = %ddest->type = %d\n", id_src->type, id_dest->width, id_dest->type);
   printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest->reg = 0x%08x\n", id_src->val, id_src2->val, id_dest->reg);
+  t0 = id_src->val;
+  
 
   print_asm_template2(shl);
 }
