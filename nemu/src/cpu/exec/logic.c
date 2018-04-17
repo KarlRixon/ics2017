@@ -3,14 +3,16 @@
 make_EHelper(test) {
   // TODO();
 
-  printf("src1->width = %d\tdest->width = %ddest->type = %d\n", id_src->width, id_dest->width, id_dest->type);
-  printf("src1 = 0x%08xsrc1->reg = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\tdest->reg = 0x%08x\tdest->str = %s\n", id_src->val, id_src->reg, id_src2->val, id_dest->val,id_dest->reg, id_dest->str);
-  if(id_dest->type == OP_TYPE_REG) rtl_and(&t0, &id_src->val, &id_dest->val);
-  else if(id_dest->type == OP_TYPE_MEM) rtl_and(&t0, &id_src->reg, &id_dest->reg);
+  // printf("src1->width = %d\tdest->width = %ddest->type = %d\n", id_src->width, id_dest->width, id_dest->type);
+  // printf("src1 = 0x%08xsrc1->reg = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\tdest->reg = 0x%08x\tdest->str = %s\n", id_src->val, id_src->reg, id_src2->val, id_dest->val,id_dest->reg, id_dest->str);
+  if(id_dest->type == OP_TYPE_REG) t0 = id_dest->val;
+  else if(id_dest->type == OP_TYPE_MEM) t0 = id_dest->reg;
+  if(id_src->type == OP_TYPE_REG) t1 = id_src->val;
+  else if(id_src->type == OP_TYPE_MEM) t1 = id_src->reg;
   operand_write(id_dest, &t0);
   rtl_set_OF(&tzero);
   rtl_set_CF(&tzero);
-  printf("t0 = %d\n", t0);
+  //  printf("t0 = %d\n", t0);
   rtl_update_ZFSF(&t0, id_dest->width);
   print_asm_template2(test);
 }
