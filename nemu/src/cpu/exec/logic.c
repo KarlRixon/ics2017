@@ -69,13 +69,15 @@ make_EHelper(sar) {
 	  rtl_sari(&t1, &t1, 0x1);
 	  t0 = t0 - 1;
   }
-  rtl_set_OF(&tzero);
+  if(t0 == 1) rtl_set_OF(&tzero);
   print_asm_template2(sar);
 }
 
 make_EHelper(shl) {
-  TODO();
+  // TODO();
   // unnecessary to update CF and OF in NEMU
+  printf("src1->width = %d\tdest->width = %ddest->type = %d\n", id_src->width, id_dest->width, id_dest->type);
+  printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest->reg = 0x%08x\n", id_src->val, id_src2->val, id_dest->reg);
 
   print_asm_template2(shl);
 }
