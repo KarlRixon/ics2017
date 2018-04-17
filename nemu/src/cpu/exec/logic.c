@@ -6,7 +6,7 @@ make_EHelper(test) {
   printf("src1->width = %d\tdest->width = %ddest->type = %d\n", id_src->width, id_dest->width, id_dest->type);
   printf("src1 = 0x%08xsrc1->reg = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\tdest->reg = 0x%08x\tdest->str = %s\n", id_src->val, id_src->reg, id_src2->val, id_dest->val,id_dest->reg, id_dest->str);
   if(id_dest->type == OP_TYPE_REG) rtl_and(&t0, &id_src->val, &id_dest->val);
-  if(id_dest->type == OP_TYPE_MEM) rtl_and(&t0, &id_src->reg, &id_dest->reg);
+  else if(id_dest->type == OP_TYPE_MEM) rtl_and(&t0, &id_src->reg, &id_dest->reg);
   operand_write(id_dest, &t0);
   rtl_set_OF(&tzero);
   rtl_set_CF(&tzero);
@@ -24,7 +24,8 @@ make_EHelper(and) {
 	  rtl_sext(&id_src->val, &id_src->val, id_src->width);
 	  id_src->width = 4;
   }
-  rtl_and(&t0, &id_src->val, &id_dest->val);
+  if(id_dest->type == OP_TYPE_REG) rtl_and(&t0, &id_src->val, &id_dest->val);
+  else if(id_dest->type == OP_TYPE_MEM) rtl_and(&t0, &id_src->reg, &id_dest->reg);
   operand_write(id_dest, &t0);
   rtl_set_OF(&tzero);
   rtl_set_CF(&tzero);
