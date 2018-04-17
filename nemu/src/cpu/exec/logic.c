@@ -96,7 +96,7 @@ make_EHelper(shr) {
 make_EHelper(setcc) {
 	uint8_t subcode = decoding.opcode & 0xf;
 	// printf("opcode = 0x%0x", decoding.opcode);
-	printf("eflags = 0x%08x\n", cpu.eflags);
+	// printf("eflags = 0x%08x\n", cpu.eflags);
 	// printf("src1->width = %d\tdest->width = %d\tsrc->type = %d\tdest->type = %d\n", id_src->width, id_dest->width, id_src->type, id_dest->type);
 	rtl_setcc(&t2, subcode);
 	
@@ -112,7 +112,7 @@ make_EHelper(setcc) {
 	else assert(0);
 	t0 += t2;
 	operand_write(id_dest, &t0);
-	// printf("t0 = 0x%08x\tt2 = 0x%80x\tsrc1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", t0, t2, id_src->val, id_src2->val, id_dest->val);
+	printf("t0 = 0x%08x\tt2 = 0x%80x\tsrc1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", t0, t2, id_src->val, id_src2->val, id_dest->val);
 	print_asm("set%s %s", get_cc_name(subcode), id_dest->str);
 }
 
