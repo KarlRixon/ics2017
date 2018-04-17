@@ -77,7 +77,7 @@ make_EHelper(sar) {
 make_EHelper(shl) {
   // TODO();
   // unnecessary to update CF and OF in NEMU
-  // printf("src1->width = %d\tdest->width = %ddest->width = %d\n", id_src->width, id_dest->width, id_dest->width);
+  printf("src1->str = %s\tsrc2->str = %sdest->str = %s\n", id_src->str, id_src2->str, id_dest->str);
   printf("src1->reg = 0x%08x\tsrc2 = 0x%08x\tdest->reg = 0x%08x\n", id_src->reg, id_src2->val, id_dest->reg);
   // rtl_lr(&t0, id_src->reg, id_src->width);
   rtl_shl(&t0, &id_dest->reg, &id_src->reg);
