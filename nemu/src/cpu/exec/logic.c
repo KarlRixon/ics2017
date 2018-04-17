@@ -95,6 +95,7 @@ make_EHelper(shr) {
 
 make_EHelper(setcc) {
 	uint8_t subcode = decoding.opcode & 0xf;
+	printf("opcode = %d", decoding.opcode);
 	// printf("eflags = 0x%08x\n", cpu.eflags);
 	// printf("src1->width = %d\tdest->width = %d\tsrc->type = %d\tdest->type = %d\n", id_src->width, id_dest->width, id_src->type, id_dest->type);
 	rtl_setcc(&t2, subcode);
