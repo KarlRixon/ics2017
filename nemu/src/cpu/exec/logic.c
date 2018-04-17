@@ -4,11 +4,12 @@ make_EHelper(test) {
   // TODO();
 
   // printf("src1->width = %d\tdest->width = %d\n", id_src->width, id_dest->width);
-  // printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
+  printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
   rtl_and(&t0, &id_src->val, &id_dest->val);
   operand_write(id_dest, &t0);
   rtl_set_OF(&tzero);
   rtl_set_CF(&tzero);
+  printf("t0 = %d\n", t0);
   rtl_update_ZFSF(&t0, id_dest->width);
   print_asm_template2(test);
 }
@@ -112,7 +113,7 @@ make_EHelper(setcc) {
 	else assert(0);
 	t0 += t2;
 	operand_write(id_dest, &t0);
-	printf("t0 = 0x%08x\tt2 = 0x%80x\tsrc1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", t0, t2, id_src->val, id_src2->val, id_dest->val);
+	// printf("t0 = 0x%08x\tt2 = 0x%80x\tsrc1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", t0, t2, id_src->val, id_src2->val, id_dest->val);
 	print_asm("set%s %s", get_cc_name(subcode), id_dest->str);
 }
 
