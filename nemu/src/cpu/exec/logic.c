@@ -80,8 +80,8 @@ make_EHelper(shl) {
   // printf("src1->width = %d\tdest->width = %ddest->width = %d\n", id_src->width, id_dest->width, id_dest->width);
   // printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest->reg = 0x%08x\n", id_src->val, id_src2->val, id_dest->reg);
   // rtl_lr(&t0, id_src->reg, id_src->width);
-  // printf("id_src->regval = 0x%08x\n", t0);
-  rtl_shl(&id_dest->reg, &id_dest->reg, &id_src->val);
+  rtl_shl(&t0, &id_dest->reg, &id_src->val);
+  printf("id_src->regval = 0x%08x\n", t0);
 
   print_asm_template2(shl);
 }
