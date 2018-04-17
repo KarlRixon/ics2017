@@ -69,6 +69,7 @@ make_EHelper(sar) {
 	  rtl_sari(&t1, &t1, 0x1);
 	  t0 = t0 - 1;
   }
+  operand_write(id_dest, &t0);
   // if(t0 == 1) rtl_set_OF(&tzero);
   print_asm_template2(sar);
 }
