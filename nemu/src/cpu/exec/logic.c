@@ -63,12 +63,13 @@ make_EHelper(sar) {
   t0 = id_src->val;
   while(t0){
 	  rtl_lr(&t1, id_dest->reg, id_dest->width);
-	  printf("id_dest->regval = 0x%08x\n", t1);
+	  // printf("id_dest->regval = 0x%08x\n", t1);
 	  rtl_andi(&t2, &t1, 0x00000001);
 	  rtl_set_CF(&t2);
+	  rtl_sari(&t1, &t1, 0x1);
 	  t0 = t0 - 1;
   }
-   
+  rtl_set_OF(&tzero);
   print_asm_template2(sar);
 }
 
