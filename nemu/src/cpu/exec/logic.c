@@ -80,7 +80,7 @@ make_EHelper(shl) {
   printf("src1->str = %s\tsrc2->str = %sdest->str = %s\n", id_src->str, id_src2->str, id_dest->str);
   printf("src1->reg = 0x%08x\tsrc2 = 0x%08x\tdest->val = 0x%08x\n", id_src->reg, id_src2->val, id_dest->val);
   // rtl_lr(&t0, id_src->reg, id_src->width);
-  rtl_shl(&id_dest->val, &id_dest->val, &id_src->val);
+  rtl_shl(&t0, &id_dest->val, &id_src->val);
   printf("id_src->regval = 0x%08x\n", t0);
 
   print_asm_template2(shl);
