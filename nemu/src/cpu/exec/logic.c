@@ -62,7 +62,7 @@ make_EHelper(sar) {
   // printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest->reg = 0x%08x\n", id_src->val, id_src2->val, id_dest->reg);
   t0 = id_src->val;
   while(t0){
-	  rtl_lr(&t1, id_dest->reg, id_dest->width);
+	  rtl_lr(&t1, id_dest->val, id_dest->width);
 	  // printf("id_dest->regval = 0x%08x\n", t1);
 	  rtl_andi(&t2, &t1, 0x00000001);
 	  // rtl_set_CF(&t2);
@@ -80,7 +80,7 @@ make_EHelper(shl) {
   printf("src1->str = %s\tsrc2->str = %sdest->str = %s\n", id_src->str, id_src2->str, id_dest->str);
   printf("src1->reg = 0x%08x\tsrc2 = 0x%08x\tdest->val = 0x%08x\n", id_src->reg, id_src2->val, id_dest->val);
   // rtl_lr(&t0, id_src->reg, id_src->width);
-  rtl_shl(&t0, &id_dest->reg, &id_src->reg);
+  rtl_shl(&id_dest->val, &id_dest->val, &id_src->val);
   printf("id_src->regval = 0x%08x\n", t0);
 
   print_asm_template2(shl);
