@@ -255,7 +255,6 @@ make_DHelper(gp2_Ib2E) {
   printf(c_bold c_red "hi\n" c_normal);
   id_src->width = 1;
   decode_op_I(eip, id_src, true);
-  printf(c_bold c_red "hi\n" c_normal);
 }
 
 /* Ev <- GvIb
