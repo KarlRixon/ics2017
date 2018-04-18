@@ -46,9 +46,9 @@ make_EHelper(sub) {
 make_EHelper(cmp) {
 	// TODO();
 
-	// printf("src->type = %d\tsrc2->type = %d\tdest->type = %d\n", id_src->type, id_src2->type, id_dest->type);
-	// printf("src->width = %d\tsrc2->width = %d\tdest->width = %d\n", id_src->width, id_src2->width, id_dest->width);
-	// printf("src->val = 0x%08x\tsrc2->val = 0x%08x\tdest->val = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
+	printf("src->type = %d\tsrc2->type = %d\tdest->type = %d\n", id_src->type, id_src2->type, id_dest->type);
+	printf("src->width = %d\tsrc2->width = %d\tdest->width = %d\n", id_src->width, id_src2->width, id_dest->width);
+	 printf("src->val = 0x%08x\tsrc2->val = 0x%08x\tdest->val = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
 	rtl_sext(&id_src->val, &id_src->val, id_src->width);
 	rtl_sext(&id_dest->val, &id_dest->val, id_dest->width);
 	rtl_sub(&t0, &id_dest->val, &id_src->val);
