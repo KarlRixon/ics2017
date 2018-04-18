@@ -12,8 +12,8 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
   };
 
   // TODO: Query EFLAGS to determine whether the condition code is satisfied.
- // dest <- ( cc is satisfied ? 1 : 0)
- printf("subcode = 0x%x\teflags = 0x%08x\n", subcode, cpu.eflags);
+  // dest <- ( cc is satisfied ? 1 : 0)
+  // printf("subcode = 0x%x\teflags = 0x%08x\n", subcode, cpu.eflags);
   switch (subcode & 0xe) {
     case CC_O:
 		rtl_get_OF(dest);
@@ -67,4 +67,5 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
   if (invert) {
     rtl_xori(dest, dest, 0x1);
   }
+  printf("dest = %d\n", *dest);
 }
