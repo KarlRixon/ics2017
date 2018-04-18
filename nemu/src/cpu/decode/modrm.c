@@ -85,7 +85,7 @@ void read_ModR_M(vaddr_t *eip, Operand *rm, bool load_rm_val, Operand *reg, bool
     reg->type = OP_TYPE_REG;
     reg->reg = m.reg;
     if (load_reg_val) {
-		printf(c_red "hi reg = %d\twidth = %d\n", reg->reg, reg->width);
+	//	printf(c_red "hi reg = %d\twidth = %d\n", reg->reg, reg->width);
       rtl_lr(&reg->val, reg->reg, reg->width);
     }
 
@@ -98,7 +98,7 @@ void read_ModR_M(vaddr_t *eip, Operand *rm, bool load_rm_val, Operand *reg, bool
     rm->type = OP_TYPE_REG;
     rm->reg = m.R_M;
     if (load_rm_val) {
-		printf(c_red "hi m.R_M = %d\twidth = %d\n", m.R_M, rm->width);
+	//	printf(c_red "hi m.R_M = %d\twidth = %d\n", m.R_M, rm->width);
       rtl_lr(&rm->val, m.R_M, rm->width);
     }
 
