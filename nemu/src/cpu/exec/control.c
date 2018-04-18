@@ -33,6 +33,7 @@ make_EHelper(call) {
   // the target address is calculated at the decode stage
   // TODO();
 
+  rtl_sext(&id_dest->val, &id_dest->val, id_dest->width);
   rtl_push(&decoding.seq_eip, id_dest->width);
   decoding.is_jmp = 1;
   decoding.jmp_eip = decoding.seq_eip + id_dest->val;
@@ -53,7 +54,10 @@ make_EHelper(ret) {
 }
 
 make_EHelper(call_rm) {
-  TODO();
-
+  // TODO();
+  rtl_sext(&id_dest->val, &id_dest->val, id_dest->width);
+  rtl_push(&decoding.seq_eip, id_dest->width);
+  decoding.jmp_eip = id_dest->val;
+  decoding.is_jmp = 1;
   print_asm("call *%s", id_dest->str);
 }
