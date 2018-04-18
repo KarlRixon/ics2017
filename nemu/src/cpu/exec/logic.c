@@ -11,11 +11,10 @@ make_EHelper(test) {
    printf("src1 = 0x%08xsrc1->reg = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\tdest->reg = 0x%08x\tdest->str = %s\n", id_src->val, id_src->reg, id_src2->val, id_dest->val,id_dest->reg, id_dest->str);
   
   rtl_and(&t0, &id_dest->val, &id_src->val);
-   printf("src1 = 0x%08xsrc1->reg = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\tdest->reg = 0x%08x\tdest->str = %s\n", id_src->val, id_src->reg, id_src2->val, id_dest->val,id_dest->reg, id_dest->str);
   operand_write(id_dest, &t0);
   rtl_set_OF(&tzero);
   rtl_set_CF(&tzero);
-  //  printf("t0 = %d\n", t0);
+   printf("t0 = %d\n", t0);
   rtl_update_ZFSF(&t0, id_dest->width);
   print_asm_template2(test);
 }
