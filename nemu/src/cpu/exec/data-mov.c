@@ -10,8 +10,9 @@ make_EHelper(push) {
 
   // printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
   // printf("id_dest->width = %d\tid_dest->str = %s\n", id_dest->width, id_dest->str);
+  id_dest->width = decoding.is_operand_size_16 ? 2 : 4;
   rtl_sext(&t2, &id_dest->val, id_dest->width);
-  rtl_push(&t2, 4);
+  rtl_push(&t2, id_dest->width);
 
   print_asm_template1(push);
 }
