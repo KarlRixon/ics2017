@@ -16,6 +16,8 @@ make_EHelper(test) {
   rtl_set_CF(&tzero);
    printf("t0 = %d\n", t0);
   rtl_update_ZFSF(&t0, id_dest->width);
+   printf("SF = %d\n", cpu.SF);
+
   print_asm_template2(test);
 }
 
