@@ -8,6 +8,7 @@ make_EHelper(test) {
   
   rtl_sext(&id_src->val, &id_src->val, id_src->width);
   rtl_sext(&id_dest->val, &id_dest->val, id_dest->width);
+   printf("src1 = 0x%08xsrc1->reg = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\tdest->reg = 0x%08x\tdest->str = %s\n", id_src->val, id_src->reg, id_src2->val, id_dest->val,id_dest->reg, id_dest->str);
   
   rtl_and(&t0, &id_dest->val, &id_src->val);
   operand_write(id_dest, &t0);
