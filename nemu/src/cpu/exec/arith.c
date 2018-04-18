@@ -23,15 +23,19 @@ make_EHelper(sub) {
   // TODO();
 
   // printf("src->val = 0x%08x\tsrc->width = %d\n", id_src->val, id_src->width);
-  if(id_src->width == 1 && id_dest->width != 1){
-	  // id_src->val = 0xf8;
-	  rtl_sext(&id_src->val, &id_src->val, id_src->width);
-	  id_src->width = id_dest->width;
-  }
+  rtl_sext(&id_src->val, &id_src->val, id_src->width);
+  rtl_sext(&id_dest->val, &id_dest->val, id_dest->width);
+  
   rtl_sub(&t0, &id_dest->val, &id_src->val);
-  if((id_src->val < 0 && id_dest->val > 0 && t0 < 0) || (id_src->val < 0 && id_dest->val > 0 && t0 > 0)) cpu.OF = 1;
-  else cpu.OF = 0;
-  cpu.CF = t0 > id_dest->val?1:0;
+  rtl_sltu(&t1, &id_dest->val, &id_src->val);
+  rtl_set_CF(&t1);
+
+  rtl_xor(&t1, &id_dest->val, &id_src->val);
+  rtl_xor(&t2, &t0, &id_dest->val);
+  rtl_and(&t1, &t1, &t2);
+  rtl_msb(&t1, &t1, id_dest->width);
+  rtl_set_OF(&t1);
+  
   operand_write(id_dest, &t0);
   rtl_update_ZFSF(&t0, id_dest->width);
   // printf("src->val = 0x%08x\tsrc->width = %d\n", id_src->val, id_src->width);
@@ -57,6 +61,7 @@ make_EHelper(cmp) {
 	rtl_and(&t1, &t1, &t2);
 	rtl_msb(&t1, &t1, id_dest->width);
 	rtl_set_OF(&t1);
+	
 	rtl_update_ZFSF(&t0, id_dest->width);
 	// printf("cpu.ZF = %d\n", cpu.ZF);
 	print_asm_template2(cmp);
