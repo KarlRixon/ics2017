@@ -95,7 +95,7 @@ make_EHelper(shl) {
 }
 
 make_EHelper(shr) {
-  TODO();
+  // TODO();
   // unnecessary to update CF and OF in NEMU
   rtl_shr(&t0, &id_dest->val, &id_src->val);
   operand_write(id_dest, &t0);
