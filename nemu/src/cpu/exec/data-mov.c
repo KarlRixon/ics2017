@@ -8,8 +8,11 @@ make_EHelper(mov) {
 make_EHelper(push) {
   // TODO();
 
-  // printf("id_dest->val = %d | 0x%x\tid_dest->str = %s\n", id_dest->val, id_dest->val, id_dest->str);
-  rtl_push(&id_dest->val, id_dest->width);
+  // printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
+  // printf("id_dest->width = %d\tid_dest->str = %s\n", id_dest->width, id_dest->str);
+  id_dest->width = decoding.is_operand_size_16 ? 2 : 4;
+  rtl_sext(&t2, &id_dest->val, id_dest->width);
+  rtl_push(&t2, id_dest->width);
 
   print_asm_template1(push);
 }
@@ -38,18 +41,21 @@ make_EHelper(popa) {
 }
 
 make_EHelper(leave) {
-  TODO();
-
+  // TODO();
+  rtl_mv(&cpu.esp, &cpu.ebp);
+  rtl_sr(R_EBP, id_dest->width, guest_to_host(cpu.esp));
+  rtl_addi(&cpu.esp, &cpu.esp, id_src->width);
   print_asm("leave");
 }
 
 make_EHelper(cltd) {
-  if (decoding.is_operand_size_16) {
-    TODO();
-  }
-  else {
-    TODO();
-  }
+  rtl_lr(&t1, R_EAX, id_dest->width);
+  rtl_slt(&t0, &t1, &tzero);
+  if (t0 == 1)
+	t2 = 0xffffffff;
+  else
+	t2 = 0;
+  rtl_sr(R_EDX, id_dest->width, &t2);
 
   print_asm(decoding.is_operand_size_16 ? "cwtl" : "cltd");
 }
@@ -74,6 +80,10 @@ make_EHelper(movsx) {
 
 make_EHelper(movzx) {
   id_dest->width = decoding.is_operand_size_16 ? 2 : 4;
+  // printf("src1->width = %d\tsrc2->width = %d\tdest->width = %d\n", id_src->width, id_src2->width, id_dest->width);
+  // printf("src1->str = %s\tsrc2->str = %s\tdest->str = %s\n", id_src->str, id_src2->str, id_dest->str);
+  // printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
+  
   operand_write(id_dest, &id_src->val);
   print_asm_template2(movzx);
 }

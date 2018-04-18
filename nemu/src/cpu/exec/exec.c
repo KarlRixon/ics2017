@@ -47,22 +47,22 @@ make_group(gp1,
   /* 0xc0, 0xc1, 0xd0, 0xd1, 0xd2, 0xd3 */
 make_group(gp2,
     EMPTY, EMPTY, EMPTY, EMPTY,
-    EMPTY, EMPTY, EMPTY, EMPTY)
+    EX(shl), EX(shr), EMPTY, EX(sar))
 
   /* 0xf6, 0xf7 */
 make_group(gp3,
-    EMPTY, EMPTY, EMPTY, EMPTY,
-    EMPTY, EMPTY, EMPTY, EMPTY)
+    IDEX(src_I, test), EMPTY, EX(not), EX(neg),
+    EX(mul), EX(imul1), EX(div), EX(idiv))
 
   /* 0xfe */
 make_group(gp4,
-    EMPTY, EMPTY, EMPTY, EMPTY,
+    EX(inc), EX(dec), EMPTY, EMPTY,
     EMPTY, EMPTY, EMPTY, EMPTY)
 
   /* 0xff */
 make_group(gp5,
-    EMPTY, EMPTY, EMPTY, EMPTY,
-    EMPTY, EMPTY, EMPTY, EMPTY)
+    EX(inc), EX(dec), EX(call_rm), EMPTY,
+	EX(jmp_rm), EMPTY, EX(push), EMPTY)
 
   /* 0x0f 0x01*/
 make_group(gp7,
@@ -98,7 +98,7 @@ opcode_entry opcode_table [512] = {
   /* 0x5c */	IDEX(r, pop), IDEX(r, pop), IDEX(r, pop), IDEX(r, pop),
   /* 0x60 */	EX(pusha), EX(popa), EMPTY, EMPTY,
   /* 0x64 */	EMPTY, EMPTY, EX(operand_size), EMPTY,
-  /* 0x68 */	IDEXW(I, push, 1), EMPTY, IDEXW(I, push, 1), EMPTY,
+  /* 0x68 */	IDEX(I, push), EMPTY, IDEXW(I, push, 1), EMPTY,
   /* 0x6c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x70 */	IDEXW(I, jcc, 1), IDEXW(I, jcc, 1), IDEXW(I, jcc, 1), IDEXW(I, jcc, 1),
   /* 0x74 */	IDEXW(I, jcc, 1), IDEXW(I, jcc, 1), IDEXW(I, jcc, 1), IDEXW(I, jcc, 1),
@@ -110,7 +110,7 @@ opcode_entry opcode_table [512] = {
   /* 0x8c */	EMPTY, IDEX(lea_M2G, lea), EMPTY, IDEX(E, pop),
   /* 0x90 */	EX(nop), EMPTY, EMPTY, EMPTY,
   /* 0x94 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x98 */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0x98 */	EMPTY, EX(cltd), EMPTY, EMPTY,
   /* 0x9c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xa0 */	IDEXW(O2a, mov, 1), IDEX(O2a, mov), IDEXW(a2O, mov, 1), IDEX(a2O, mov),
   /* 0xa4 */	EMPTY, EMPTY, EMPTY, EMPTY,
@@ -171,22 +171,22 @@ opcode_entry opcode_table [512] = {
   /* 0x74 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x78 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x7c */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x80 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x84 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x88 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x8c */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x90 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x94 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x98 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x9c */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0x80 */	IDEX(I, jcc), IDEX(I, jcc), IDEX(I, jcc), IDEX(I, jcc),
+  /* 0x84 */	IDEX(I, jcc), IDEX(I, jcc), IDEX(I, jcc), IDEX(I, jcc),
+  /* 0x88 */	IDEX(I, jcc), IDEX(I, jcc), IDEX(I, jcc), IDEX(I, jcc),
+  /* 0x8c */	IDEX(I, jcc), IDEX(I, jcc), IDEX(I, jcc), IDEX(I, jcc),
+  /* 0x90 */	IDEX(gp7_E, setcc), IDEX(gp7_E, setcc), IDEX(gp7_E, setcc), IDEX(gp7_E, setcc),
+  /* 0x94 */	IDEX(gp7_E, setcc), IDEX(gp7_E, setcc), IDEX(gp7_E, setcc), IDEX(gp7_E, setcc),
+  /* 0x98 */	IDEX(gp7_E, setcc), IDEX(gp7_E, setcc), IDEX(gp7_E, setcc), IDEX(gp7_E, setcc),
+  /* 0x9c */	IDEX(gp7_E, setcc), IDEX(gp7_E, setcc), IDEX(gp7_E, setcc), IDEX(gp7_E, setcc),
   /* 0xa0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xa4 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xa8 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0xac */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0xac */	EMPTY, EMPTY, EMPTY, IDEX(E2G, imul2),
   /* 0xb0 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0xb4 */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0xb4 */	EMPTY, EMPTY, IDEX(movzx_E2G, movzx), IDEX(movzx_E2G, movzx),
   /* 0xb8 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0xbc */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0xbc */	EMPTY, EMPTY, IDEX(movzx_E2G, movsx), IDEX(movzx_E2G, movsx),
   /* 0xc0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xc4 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xc8 */	EMPTY, EMPTY, EMPTY, EMPTY,
