@@ -251,6 +251,7 @@ make_DHelper(gp2_cl2E) {
 }
 
 make_DHelper(gp2_Ib2E) {
+  printf(c_bold c_red "hi\n" c_normal);
   decode_op_rm(eip, id_dest, true, NULL, false);
   id_src->width = 1;
   decode_op_I(eip, id_src, true);
