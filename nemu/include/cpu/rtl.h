@@ -183,16 +183,18 @@ static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
   // TODO();
-  t0 = (*result == 0);
-  rtl_set_ZF(&t0);
+  rtlreg_t t;
+  t = (*result == 0);
+  rtl_set_ZF(&t);
   // printf("t0 = %d\tcpu.ZF = %d\n", t0, cpu.ZF);
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
   // TODO();
-  t0 = c_shr(*result, width*8-1);
-  rtl_set_SF(&t0);
+  rtlreg_t t;
+  t = c_shr(*result, width*8-1);
+  rtl_set_SF(&t);
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
