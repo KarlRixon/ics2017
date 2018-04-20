@@ -151,11 +151,11 @@ void difftest_step(uint32_t eip) {
   // Set `diff` as `true` if they are not the same.
   // TODO();
 
-  if(r.eflags == cpu.eflags && r.eax == cpu.eax && r.ebx == cpu.ebx && r.ecx == cpu.ecx && r.edx == cpu.edx && r.esp == cpu.esp && r.ebp == cpu.ebp && r.esi == cpu.esi && r.edi == cpu.edi &&r.eip == cpu.eip) diff = false;
+  if(r.eax == cpu.eax && r.ebx == cpu.ebx && r.ecx == cpu.ecx && r.edx == cpu.edx && r.esp == cpu.esp && r.ebp == cpu.ebp && r.esi == cpu.esi && r.edi == cpu.edi &&r.eip == cpu.eip) diff = false;
   else{
 	  diff = true;
 	  printf(c_bold c_red "regs diff detected\n" c_yellow "reg\t\tqemu\t\tnemu\n" c_normal);
-	  if(r.eflags != cpu.eflags) printf(c_bold c_yellow "eflags" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.eflags, cpu.eflags);
+	  // if(r.eflags != cpu.eflags) printf(c_bold c_yellow "eflags" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.eflags, cpu.eflags);
 	  if(r.eax != cpu.eax) printf(c_bold c_yellow "eax" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.eax, cpu.eax);
 	  if(r.ecx != cpu.ecx) printf(c_bold c_yellow "ecx" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.ecx, cpu.ecx);
 	  if(r.edx != cpu.edx) printf(c_bold c_yellow "edx" c_red "\t\t0x%08x\t\t0x%08x\n" c_normal, r.edx, cpu.edx);
