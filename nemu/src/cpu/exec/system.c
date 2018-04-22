@@ -56,7 +56,8 @@ make_EHelper(in) {
 
 make_EHelper(out) {
   // TODO();
-  
+ // printf("src = 0x%08x\tdest = 0x%08X\n". id_src->val, id_dest->val);
+
   print_asm_template2(out);
 
 #ifdef DIFF_TEST
