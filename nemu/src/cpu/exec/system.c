@@ -59,7 +59,7 @@ make_EHelper(out) {
   // TODO();
   printf("src = 0x%08x\tdest = 0x%08X\n", id_src->val, id_dest->val);
   printf("src-width = %d\tdest-width = %d\n", id_src->width, id_dest->width);
-
+  printf("is_16 = %d\n", decoding.is_operand_size_16);
   print_asm_template2(out);
 
 #ifdef DIFF_TEST
