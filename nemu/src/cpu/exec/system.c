@@ -46,8 +46,8 @@ void pio_write(ioaddr_t, int, uint32_t);
 
 make_EHelper(in) {
   // TODO();
-  printf("src = 0x%08x\tdest = 0x%08X\n", id_src->val, id_dest->val);
-
+  // printf("src = 0x%08x\tdest = 0x%08X\n", id_src->val, id_dest->val);
+  // pio_read(id_src->val, id_dest->width);
   print_asm_template2(in);
 
 #ifdef DIFF_TEST
@@ -57,9 +57,9 @@ make_EHelper(in) {
 
 make_EHelper(out) {
   // TODO();
-  printf("src = 0x%08x\tdest = 0x%08X\n", id_src->val, id_dest->val);
-  printf("src-width = %d\tdest-width = %d\n", id_src->width, id_dest->width);
-  printf("is_16 = %d\n", decoding.is_operand_size_16);
+  // printf("src = 0x%08x\tdest = 0x%08X\n", id_src->val, id_dest->val);
+  // printf("src-width = %d\tdest-width = %d\n", id_src->width, id_dest->width);
+  pio_write(id_dest->val, id_src->width, id_src->val);
   print_asm_template2(out);
 
 #ifdef DIFF_TEST
