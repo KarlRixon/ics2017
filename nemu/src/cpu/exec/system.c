@@ -46,7 +46,7 @@ void pio_write(ioaddr_t, int, uint32_t);
 
 make_EHelper(in) {
   // TODO();
-  // printf("src = 0x%08x\tdest = 0x%08X\n", id_src->val, id_dest->val);
+   printf("src = 0x%08x\tdest = 0x%08X\n", id_src->val, id_dest->val);
   t0 = pio_read(id_src->val, id_dest->width);
   rtl_mv(&id_dest->val, &t0);
   print_asm_template2(in);
