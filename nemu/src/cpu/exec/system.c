@@ -50,6 +50,7 @@ make_EHelper(in) {
   t0 = pio_read(id_src->val, id_dest->width);
   printf("t0 = 0x%08x\n", t0);
   rtl_mv(&id_dest->val, &t0);
+  printf("dest = 0x%08x\n", id_dest->val);
   print_asm_template2(in);
 
 #ifdef DIFF_TEST
