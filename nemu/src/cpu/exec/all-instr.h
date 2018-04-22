@@ -48,6 +48,10 @@ make_EHelper(shr);
 make_EHelper(setcc);
 make_EHelper(not);
 
+//system
+make_EHelper(out);
+make_EHelper(in);
+
 //specail
 make_EHelper(nop);
 make_EHelper(inv);
