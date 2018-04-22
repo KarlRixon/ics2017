@@ -55,8 +55,8 @@ make_EHelper(in) {
 }
 
 make_EHelper(out) {
-  TODO();
-
+  // TODO();
+  
   print_asm_template2(out);
 
 #ifdef DIFF_TEST
