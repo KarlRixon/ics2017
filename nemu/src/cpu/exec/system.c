@@ -62,11 +62,11 @@ make_EHelper(out) {
   // TODO();
   // printf("src = 0x%08x\tdest = 0x%08X\n", id_src->val, id_dest->val);
   // printf("src-width = %d\tdest-width = %d\n", id_src->width, id_dest->width);
-  t0 = pio_read(id_dest->val, id_src->width);
-   printf("t0 = 0x%08x\n", t0);
+  //t0 = pio_read(id_dest->val, id_src->width);
+  // printf("t0 = 0x%08x\n", t0);
   pio_write(id_dest->val, id_src->width, id_src->val);
-  t0 = pio_read(id_dest->val, id_src->width);
-   printf("t0 = 0x%08x\n", t0);
+  //t0 = pio_read(id_dest->val, id_src->width);
+  // printf("t0 = 0x%08x\n", t0);
   print_asm_template2(out);
 
 #ifdef DIFF_TEST
