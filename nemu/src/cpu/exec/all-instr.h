@@ -47,6 +47,7 @@ make_EHelper(shl);
 make_EHelper(shr);
 make_EHelper(setcc);
 make_EHelper(not);
+make_EHelper(rol);
 
 //system
 make_EHelper(out);
