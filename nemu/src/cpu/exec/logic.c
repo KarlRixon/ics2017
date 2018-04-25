@@ -25,12 +25,9 @@ make_EHelper(and) {
   
   // printf("src1->width = %d\tdest->width = %d\n", id_src->width, id_dest->width);
   // printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
-  if(id_src->width == 1 && id_dest->width != 1){
-	  rtl_sext(&id_src->val, &id_src->val, id_src->width);
-	  id_src->width = 4;
-  }
-  if(id_dest->type == OP_TYPE_REG) rtl_and(&t0, &id_src->val, &id_dest->val);
-  else if(id_dest->type == OP_TYPE_MEM) rtl_and(&t0, &id_src->reg, &id_dest->reg);
+  rtl_sext(&id_src->val, &id_src->val, id_src->width);
+  rtl_sext(&id_dest->val, &id_dest->val, id_dest->width);
+  rtl_and(&t0, &id_dest->val, &id_src->val);
   operand_write(id_dest, &t0);
   rtl_set_OF(&tzero);
   rtl_set_CF(&tzero);
