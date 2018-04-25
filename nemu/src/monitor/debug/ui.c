@@ -135,10 +135,10 @@ static int cmd_info(char *args){
 		printf("EDI		0x%08x | %d\n", cpu.edi, cpu.edi);
 		printf("EIP		0x%08x | %d\n" c_normal, cpu.eip, cpu.eip);
 		printf(c_bold c_yellow "flags		val\n" c_normal);
-		printf("OF		%d\n", cpu.OF);
+		printf(c_bold "OF		%d\n", cpu.OF);
 		printf("SF		%d\n", cpu.SF);
 		printf("ZF		%d\n", cpu.ZF);
-		printf("CF		%d\n", cpu.CF);
+		printf("CF		%d\n" c_normal, cpu.CF);
 	}
 	else if(strcmp(args,"w") == 0){
 		show_wp();
