@@ -103,8 +103,14 @@ make_EHelper(dec) {
 }
 
 make_EHelper(neg) {
-  TODO();
-
+  // TODO();
+  t0 = 1;
+  if(id_dest->val) rtl_set_CF(&t0);
+  else rtl_set_CF(&tzero);
+  t1 = -id_dest->val;
+  operand_write(id_dest, &t1);
+  rtl_update_ZFSF(&t1, id_dest->width);
+  //OF??
   print_asm_template1(neg);
 }
 
