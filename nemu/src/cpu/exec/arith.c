@@ -115,6 +115,7 @@ make_EHelper(neg) {
 }
 
 make_EHelper(adc) {
+  rtl_sext(&id_src->val, &id_src->val, id_src->width);
   rtl_add(&t2, &id_dest->val, &id_src->val);
   rtl_sltu(&t3, &t2, &id_dest->val);
   rtl_get_CF(&t1);
