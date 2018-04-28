@@ -10,6 +10,14 @@ make_EHelper(push) {
 
   // printf("src1 = 0x%08x\tsrc2 = 0x%08x\tdest = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
   // printf("id_dest->width = %d\tid_dest->str = %s\n", id_dest->width, id_dest->str);
+  if (id_dest->width == 1) {
+	  if (decoding.is_operand_size_16)
+		id_dest->width = 2;
+	  else
+		id_dest->width = 4;
+  }
+  rtl_sext(&id_dest->val, &id_dest->val, id_dest->width);
+  rtl_push(&id_dest->val, id_dest->width);
   rtl_sext(&t2, &id_dest->val, id_dest->width);
   rtl_push(&t2, id_dest->width);
 
