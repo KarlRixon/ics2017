@@ -29,14 +29,29 @@ make_EHelper(pop) {
 }
 
 make_EHelper(pusha) {
-  TODO();
-
+  // TODO();
+  t0 = cpu.esp;
+  rtl_push(&cpu.eax, 4);
+  rtl_push(&cpu.ecx, 4);
+  rtl_push(&cpu.edx, 4);
+  rtl_push(&cpu.ebx, 4);
+  rtl_push(&t0, 4);
+  rtl_push(&cpu.ebp, 4);
+  rtl_push(&cpu.esi, 4);
+  rtl_push(&cpu.edi, 4);
   print_asm("pusha");
 }
 
 make_EHelper(popa) {
-  TODO();
-
+  // TODO();
+  rtl_pop(&cpu.edi);
+  rtl_pop(&cpu.esi);
+  rtl_pop(&cpu.ebp);
+  rtl_pop(&t0);
+  rtl_pop(&cpu.ebx);
+  rtl_pop(&cpu.edx);
+  rtl_pop(&cpu.ecx);
+  rtl_pop(&cpu.eax);
   print_asm("popa");
 }
 
@@ -62,10 +77,16 @@ make_EHelper(cltd) {
 
 make_EHelper(cwtl) {
   if (decoding.is_operand_size_16) {
-    TODO();
+    // TODO();
+	rtl_lr(&t0, R_AL, 1);
+	t0 = (int16_t)(int8_t)(uint8_t)t0;
+	rtl_sr(R_AX, 2, &t0);
   }
   else {
-    TODO();
+    // TODO();
+	rtl_lr(&t0, R_AX, 2);
+    t0 = (int32_t)(int16_t)(uint16_t)t0;
+	rtl_sr(R_EAX, 4, &t0);
   }
 
   print_asm(decoding.is_operand_size_16 ? "cbtw" : "cwtl");
