@@ -18,8 +18,6 @@ make_EHelper(push) {
   }
   rtl_sext(&id_dest->val, &id_dest->val, id_dest->width);
   rtl_push(&id_dest->val, id_dest->width);
-  rtl_sext(&t2, &id_dest->val, id_dest->width);
-  rtl_push(&t2, id_dest->width);
 
   print_asm_template1(push);
 }
