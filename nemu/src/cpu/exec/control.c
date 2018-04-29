@@ -14,7 +14,7 @@ make_EHelper(jcc) {
   uint8_t subcode = decoding.opcode & 0xf;
   rtl_setcc(&t2, subcode);
   rtl_sext(&id_dest->val, &id_dest->val, id_dest->width);
-  decoding.jmp_eip = decoding.seq_eip + id_dest->val;
+  // decoding.jmp_eip = decoding.seq_eip + id_dest->val;
   // printf("dest->width = %x\n", id_dest->width);
   // printf("seq_eip = 0x%08x\tdest_.val = 0x%08x\tjmp_eip = 0x%08x\n", decoding.seq_eip, id_dest->val, decoding.jmp_eip);
   decoding.is_jmp = t2;
