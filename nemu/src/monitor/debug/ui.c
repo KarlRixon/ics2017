@@ -122,8 +122,8 @@ static int cmd_info(char *args){
 	if(*args != 'r' && *args != 'w'){
 		puts(c_red c_bold "info SUBCMD；"c_normal c_red " no subcmd specified (register or watchpoint)\n" c_normal);
 		return 1;
-	}
-	if(strcmp(args,"r") == 0){
+ 	}
+	if(strcmp(args,"r") == 0 ){
 		printf(c_bold c_yellow "reg		hex\t\tdec\n" c_normal);
 		printf(c_bold "EAX		0x%08x | %d\n", cpu.eax, cpu.eax);
 		printf("ECX		0x%08x | %d\n", cpu.ecx, cpu.ecx);
@@ -134,6 +134,11 @@ static int cmd_info(char *args){
 		printf("ESI		0x%08x | %d\n", cpu.esi, cpu.esi);
 		printf("EDI		0x%08x | %d\n", cpu.edi, cpu.edi);
 		printf("EIP		0x%08x | %d\n" c_normal, cpu.eip, cpu.eip);
+		printf(c_bold c_yellow "flags		val\n" c_normal);
+		printf(c_bold "OF		%d\n", cpu.OF);
+		printf("SF		%d\n", cpu.SF);
+		printf("ZF		%d\n", cpu.ZF);
+		printf("CF		%d\n" c_normal, cpu.CF);
 	}
 	else if(strcmp(args,"w") == 0){
 		show_wp();
