@@ -5,16 +5,33 @@ make_EHelper(add) {
 
   // printf("src->width = %d\tsrc2->width = %d\tdest->width = %d\n", id_src->width, id_src2->width, id_dest->width);
   // printf("src->val = 0x%08x\tsrc2->val = 0x%08x\tdest->val = 0x%08x\n", id_src->val, id_src2->val, id_dest->val);
-  if(id_src->width == 1 && id_dest->width != 1){
-	  rtl_sext(&id_src->val, &id_src->val, id_src->width);
-	  id_src->width = id_dest->width;
-  }
-  rtl_add(&t0, &id_dest->val, &id_src->val);
-  if((id_src->val > 0 && id_dest->val > 0 && t0 < 0) || (id_src->val < 0 && id_dest->val < 0 && t0 > 0)) cpu.OF = 1;
-  else cpu.OF = 0;
-  cpu.CF = t0 < id_dest->val?1:0;
-  operand_write(id_dest, &t0);
-  rtl_update_ZFSF(&t0, id_dest->width);
+  rtl_sext(&id_src->val, &id_src->val, id_src->width);
+  rtl_sext(&id_dest->val, &id_dest->val, id_dest->width);
+  rtl_add(&t2, &id_dest->val, &id_src->val);
+  operand_write(id_dest, &t2);
+
+  rtl_update_ZFSF(&t2, id_dest->width);
+
+  rtl_sltu(&t0, &t2, &id_dest->val);
+  rtl_set_CF(&t0);
+
+  rtl_xor(&t0, &id_dest->val, &id_src->val);
+  rtl_not(&t0);
+  rtl_xor(&t1, &id_dest->val, &t2);
+  rtl_and(&t0, &t0, &t1);
+  rtl_msb(&t0, &t0, id_dest->width);
+  rtl_set_OF(&t0);
+					  
+//  if(id_src->width == 1 && id_dest->width != 1){
+//	  rtl_sext(&id_src->val, &id_src->val, id_src->width);
+//	  id_src->width = id_dest->width;
+//  }
+//  rtl_add(&t0, &id_dest->val, &id_src->val);
+//  if((id_src->val > 0 && id_dest->val > 0 && t0 < 0) || (id_src->val < 0 && id_dest->val < 0 && t0 > 0)) cpu.OF = 1;
+//  else cpu.OF = 0;
+//  cpu.CF = t0 < id_dest->val?1:0;
+//  operand_write(id_dest, &t0);
+//  rtl_update_ZFSF(&t0, id_dest->width);
 
   print_asm_template2(add);
 }
