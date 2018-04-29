@@ -128,20 +128,25 @@ make_EHelper(not) {
 make_EHelper(rol){
   // TODO();
   // unnecessary to update CF and OF in NEMU
-  t0 = id_src->val;
-  while(t0 != 0){
-	t0 -= 1;
-	rtl_msb(&t2, &id_dest->val, id_dest->width);
-	rtl_shli(&id_dest->val, &id_dest->val, 1);
-	rtl_add(&t1, &id_dest->val, &t2);
-  } 
-  operand_write(id_dest, &t1);
-  if(id_src->val == 1){
-	rtl_msb(&t2, &t1, id_dest->width);
+  rtl_shl(&t0, &id_dest->val, &id_src->val);
+  rtl_shri(&t1, &id_dest->val, id_dest->width * 8 - id_src->val);
+  rtl_or(&t2, &t1, &t0);
+  operand_write(id_dest, &t2);
+
+//  t0 = id_src->val;
+//  while(t0 != 0){
+//	t0 -= 1;
+//	rtl_msb(&t2, &id_dest->val, id_dest->width);
+//	rtl_shli(&id_dest->val, &id_dest->val, 1);
+//	rtl_add(&t1, &id_dest->val, &t2);
+//  } 
+//  operand_write(id_dest, &t1);
+    if(id_src->val == 1){
+	rtl_msb(&t2, &t2, id_dest->width);
 	if(t2 != cpu.CF)
 		cpu.OF = 1;
 	else
 		cpu.OF = 0;
-  } 
+    } 
   print_asm_template1(not);
 }
