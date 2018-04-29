@@ -143,7 +143,7 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   *dest = c_sar(c_shl(*src1, (4 - width) * 8), (4 - width) * 8);
 }
 
- void rtl_push(const rtlreg_t* src1, int width) {
+static inline void rtl_push(const rtlreg_t* src1, int width) {
   // esp <- esp - 4
   // M[esp] <- src1
   // TODO();
