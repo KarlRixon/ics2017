@@ -8,7 +8,7 @@ extern const rtlreg_t tzero;
 
 /* RTL basic instructions */
 
- inline void rtl_li(rtlreg_t* dest, uint32_t imm) {
+static inline void rtl_li(rtlreg_t* dest, uint32_t imm) {
   *dest = imm;
 }
 
@@ -143,7 +143,7 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   *dest = c_sar(c_shl(*src1, (4 - width) * 8), (4 - width) * 8);
 }
 
-static inline void rtl_push(const rtlreg_t* src1, int width) {
+ void rtl_push(const rtlreg_t* src1, int width) {
   // esp <- esp - 4
   // M[esp] <- src1
   // TODO();
