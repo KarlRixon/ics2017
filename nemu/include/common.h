@@ -6,7 +6,7 @@
 
 /* You will define this macro in PA2 */
 #define HAS_IOE
-volatile static int dummy;
+// volatile static int dummy=0;
 #include "debug.h"
 #include "macro.h"
 
