@@ -52,6 +52,7 @@ make_EHelper(rol);
 //system
 make_EHelper(out);
 make_EHelper(in);
+make_EHelper(lidt);
 
 //specail
 make_EHelper(nop);
