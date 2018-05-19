@@ -19,6 +19,7 @@ make_EHelper(jcc);
 make_EHelper(jmp_rm);
 make_EHelper(call);
 make_EHelper(ret);
+make_EHelper(iret);
 make_EHelper(call_rm);
 
 //arith
@@ -52,6 +53,8 @@ make_EHelper(rol);
 //system
 make_EHelper(out);
 make_EHelper(in);
+make_EHelper(lidt);
+make_EHelper(int);
 
 //specail
 make_EHelper(nop);
