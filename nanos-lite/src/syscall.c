@@ -19,7 +19,6 @@ static inline _RegSet* sys_exit(_RegSet *r) {
 
 static inline _RegSet* sys_write(_RegSet *r) {
 	Log("!");
-	printf("!");
 	for(int i = 0; i < SYSCALL_ARG2(r); i++) {
 		_putc(((char*)SYSCALL_ARG3(r))[i]);
 	}
