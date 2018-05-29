@@ -18,11 +18,6 @@ static inline _RegSet* sys_exit(_RegSet *r) {
 }
 
 static inline _RegSet* sys_write(_RegSet *r) {
-   	//int fd = (int)SYSCALL_ARG2(r);
-    //const void *buf = (const void *)SYSCALL_ARG3(r);
-    //size_t len = (size_t)SYSCALL_ARG4(r);
-    //SYSCALL_ARG1(r) = fs_write(fd, buf, len);
-    //return NULL;
 	for(int i = 0; i < SYSCALL_ARG2(r); i++) {
 		_putc(((char*)SYSCALL_ARG3(r))[i]);
 	}
