@@ -87,3 +87,58 @@ int fs_close(int fd) {
 size_t fs_filesz(int fd) {
 	return file_table[fd].size;
 }
+
+ssize_t fs_write(int fd, const void *buf, size_t len) {
+	ssize_t fs_size = fs_filesz(fd);
+	//Log("in the write, fd = %d, file size = %d, len = %d, file open_offset = %d\n", fd, fs_size, len, file_table[fd].open_offset);
+	switch(fd) {
+		case FD_STDOUT:
+		case FD_STDERR:
+			// call _putc()
+			for(int i = 0; i < len; i++) {
+				_putc(((char*)buf)[i]);
+			}
+			break;
+		case FD_FB:
+			// write to frame buffer
+			fb_write(buf, file_table[fd].open_offset, len);
+			file_table[fd].open_offset += len;
+			break;
+		default:
+			// write to ramdisk
+			if(file_table[fd].open_offset >= fs_size)
+				return 0;	
+			if(file_table[fd].open_offset + len > fs_size)
+				len = fs_size - file_table[fd].open_offset;
+			ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
+			file_table[fd].open_offset += len;
+			break;
+	}
+	return len;
+}
+
+off_t fs_lseek(int fd, off_t offset, int whence) {
+	off_t result = -1;
+
+	switch(whence) {
+		case SEEK_SET:
+			if (offset >= 0 && offset <= file_table[fd].size) {
+				file_table[fd].open_offset = offset;
+				result = file_table[fd].open_offset = offset;
+			}
+			break;
+		case SEEK_CUR:
+			if ((offset + file_table[fd].open_offset >= 0) && 
+					(offset + file_table[fd].open_offset <= file_table[fd].size)) {
+				file_table[fd].open_offset += offset;
+				result = file_table[fd].open_offset;
+			}
+			break;
+		case SEEK_END:
+			file_table[fd].open_offset = file_table[fd].size + offset;
+			result = file_table[fd].open_offset;
+			break;
+	}
+	
+	return result;
+}
