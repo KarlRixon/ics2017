@@ -37,13 +37,13 @@ static inline _RegSet* sys_write(_RegSet *r) {
 }
 
 static inline _RegSet* sys_brk(_RegSet *r) {
-	//SYSCALL_ARG1(r) = 0;
-	//return NULL;
-		  
-	// printf("%x\n", _heap.end);
-	uint32_t new_brk = SYSCALL_ARG2(r);
-	SYSCALL_ARG1(r) = mm_brk(new_brk);
+	SYSCALL_ARG1(r) = 0;
 	return NULL;
+		  
+	//printf("%x\n", _heap.end);
+	//uint32_t new_brk = SYSCALL_ARG2(r);
+	//SYSCALL_ARG1(r) = mm_brk(new_brk);
+	//return NULL;
 }
 
 static inline _RegSet* sys_open(_RegSet *r) {
