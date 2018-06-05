@@ -29,8 +29,8 @@ int main() {
 
   //printf("PASS!!!\n");
 
-  fseek(fp, 500, SEEK_SET);
-  for (i = 500; i < 1000; i ++) {
+  fseek(fp, 0, SEEK_SET);
+  for (i = 500; i < 10000; i ++) {
     fscanf(fp, "%d", &n);
     printf("n = %d\n", n);
     //assert(n == i + 1);
