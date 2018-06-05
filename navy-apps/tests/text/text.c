@@ -31,7 +31,7 @@ int main() {
 
   for (i = 500; i <1500; i ++) {
     fscanf(fp, "%d", &n);
-    //printf("n = %d\n", n);
+    printf("n = %d\n", n);
     assert(n == i + 1);
   }
 
