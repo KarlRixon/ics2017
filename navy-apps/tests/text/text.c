@@ -10,6 +10,8 @@ int main() {
   assert(size == 5000);
 
   printf("size = %d\n", size);
+  printf("size = %d\n", size);
+  printf("size = %d\n", size);
   
   fseek(fp, 500 * 5, SEEK_SET);
   int i, n;
