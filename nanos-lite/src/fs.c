@@ -94,7 +94,6 @@ ssize_t fs_write(int fd, const void *buf, size_t len) {
 		case FD_STDOUT:
 		case FD_STDERR:
 			// call _putc()
-			Log("!/");
 			for(int i = 0; i < len; i++) {
 				_putc(((char*)buf)[i]);
 			}
@@ -103,6 +102,7 @@ ssize_t fs_write(int fd, const void *buf, size_t len) {
 			// write to frame buffer
 			fb_write(buf, file_table[fd].open_offset, len);
 			file_table[fd].open_offset += len;
+			Log("!");
 			break;
 		default:
 			// write to ramdisk
@@ -112,7 +112,7 @@ ssize_t fs_write(int fd, const void *buf, size_t len) {
 				len = fs_size - file_table[fd].open_offset;
 			ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
 			file_table[fd].open_offset += len;
-			Log("offset = %d\n", file_table[fd].open_offset);
+			Log("offset = %d", file_table[fd].open_offset);
 			break;
 	}
 	return len;
