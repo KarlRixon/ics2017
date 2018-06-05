@@ -12,10 +12,11 @@ int main() {
   //printf("size = %d\n", size);
   
   fseek(fp, 500 * 5, SEEK_SET);
-  printf("hello\n");
+  //printf("hello\n");
   int i, n;
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
+  printf("size = %d\n", size);
     assert(n == i + 1);
   }
 
