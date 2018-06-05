@@ -39,7 +39,7 @@ int fs_open(const char *pathname, int flags, int mode) {
 	Log("the total files : %d\n", NR_FILES);
 	Log("pathname %s\n", pathname);
 	for (i = 0; i < NR_FILES; i++) {
-		printf("file name: %s\n", file_table[i].name);
+		//printf("file name: %s\n", file_table[i].name);
 		if (strcmp(file_table[i].name, pathname) == 0) {
 			return i;
 		}
