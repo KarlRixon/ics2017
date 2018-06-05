@@ -29,7 +29,7 @@ int main() {
 
   //printf("PASS!!!\n");
 
-  fseek(fp, 500*5, SEEK_SET);
+  fseek(fp, 500, SEEK_SET);
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
     printf("n = %d\n", n);
