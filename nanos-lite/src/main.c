@@ -30,9 +30,9 @@ int main() {
 
   init_fs();
 
-  uint32_t entry = loader(NULL, NULL);
+  //uint32_t entry = loader(NULL, NULL);
   //uint32_t entry = loader(NULL, "/bin/hello");
-  //uint32_t entry = loader(NULL, "/bin/text");
+  uint32_t entry = loader(NULL, "/bin/text");
   //uint32_t entry = loader(NULL, "/bin/bmptest");
   //uint32_t entry = loader(NULL, "/bin/events");
 
