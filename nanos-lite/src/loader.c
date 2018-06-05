@@ -18,7 +18,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
   //return (uintptr_t)DEFAULT_ENTRY;
 
   int fd = fs_open(filename, 0, 0);
-  fs_read(fd, 0, fs_filesz(fd));
+  fs_read(fd, DEFAULT_ENTRY, fs_filesz(fd));
 
   //int fd = fs_open(filename, 0, 0);
   //int i, pages = fs_filesz(fd) / PGSIZE + 1;
