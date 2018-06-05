@@ -102,7 +102,7 @@ ssize_t fs_write(int fd, const void *buf, size_t len) {
 			// write to frame buffer
 			fb_write(buf, file_table[fd].open_offset, len);
 			file_table[fd].open_offset += len;
-			Log("!");
+			//Log("!");
 			break;
 		default:
 			// write to ramdisk
