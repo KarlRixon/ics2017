@@ -28,7 +28,7 @@ static inline _RegSet* sys_write(_RegSet *r) {
 	//}
 	//return NULL;
 	
-	Log("!");
+	//Log("!");
 	int fd = (int)SYSCALL_ARG2(r);
 	const void *buf = (const void *)SYSCALL_ARG3(r);
 	size_t len = (size_t)SYSCALL_ARG4(r);
