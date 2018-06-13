@@ -238,6 +238,7 @@ void exec_wrapper(bool print_flag) {
   strcat(decoding.asm_buf, decoding.assembly);
   Log_write("%s\n", decoding.asm_buf);
   if (print_flag) {
+	Log("%s\n", decoding.asm_buf);
     puts(decoding.asm_buf);
   }
 #endif
