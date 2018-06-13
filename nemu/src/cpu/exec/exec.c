@@ -239,7 +239,7 @@ void exec_wrapper(bool print_flag) {
   Log_write("%s\n", decoding.asm_buf);
   if (print_flag) {
 	//Log("%s\n", decoding.asm_buf);
-	Log_write("%d\n", print_flag);
+	//Log_write("%d\n", print_flag);
 	
 	puts(decoding.asm_buf);
   }
