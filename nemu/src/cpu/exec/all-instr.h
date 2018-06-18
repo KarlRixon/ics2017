@@ -55,6 +55,8 @@ make_EHelper(out);
 make_EHelper(in);
 make_EHelper(lidt);
 make_EHelper(int);
+make_EHelper(mov_r2cr);
+make_EHelper(mov_cr2r);
 
 //specail
 make_EHelper(nop);
