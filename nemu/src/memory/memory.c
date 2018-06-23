@@ -28,10 +28,71 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 	  memcpy(guest_to_host(addr), &data, len);
 }
 
+paddr_t page_translate(vaddr_t addr, bool is_write) {
+	PDE pde, *pgdir;
+	PTE pte, *pgtab;
+	paddr_t paddr = addr;
+
+    if (cpu.cr0.protect_enable && cpu.cr0.paging) {
+	    pgdir = (PDE *)(intptr_t)(cpu.cr3.page_directory_base << 12);
+	    pde.val = paddr_read((intptr_t)&pgdir[(addr >> 22) & 0x3ff], 4);
+	    assert(pde.present);
+	    pde.accessed = 1;
+
+	    pgtab = (PTE *)(intptr_t)(pde.page_frame << 12);
+	    pte.val = paddr_read((intptr_t)&pgtab[(addr >> 12) & 0x3ff], 4);
+	    assert(pte.present);
+	    pte.accessed = 1;
+	    pte.dirty = is_write ? 1 : pte.dirty;
+
+	    paddr = (pte.page_frame << 12) | (addr & PAGE_MASK);
+	}
+
+	return paddr;
+}
+
+#define CROSS_PAGE(addr, len) \
+	((((addr) + (len) - 1) & ~PAGE_MASK) != ((addr) & ~PAGE_MASK))
+
+
 uint32_t vaddr_read(vaddr_t addr, int len) {
-  return paddr_read(addr, len);
+  // return paddr_read(addr, len);
+    paddr_t paddr;
+
+    if (CROSS_PAGE(addr, len)) {
+	    /* data cross the page boundary */
+	//    union {
+	//		uint8_t bytes[4];
+	//		uint32_t dword;
+	//	  } data = {0};
+	//	for (int i = 0; i < len; i++) {
+	//	    paddr = page_translate(addr + i, false);
+	//	    data.bytes[i] = (uint8_t)paddr_read(paddr, 1);
+	//	}
+	//  return data.dword;
+	assert(0);
+    } else {
+		paddr = page_translate(addr, false);
+	    return paddr_read(paddr, len);
+	}
 }
 
 void vaddr_write(vaddr_t addr, int len, uint32_t data) {
-  paddr_write(addr, len, data);
+  //paddr_write(addr, len, data);
+  paddr_t paddr;
+
+	if (CROSS_PAGE(addr, len)) {
+		/* data cross the page boundary */
+	//	assert(0);
+	//    for (int i = 0; i < len; i++) {
+	//      paddr = page_translate(addr, true);
+	//      paddr_write(paddr, 1, data);
+	//      data >>= 8;
+	//      addr++;
+	//    }
+		assert(0);
+	} else {
+	      paddr = page_translate(addr, true);
+	      paddr_write(paddr, len, data);
+    }
 }
