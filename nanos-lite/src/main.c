@@ -42,7 +42,7 @@ int main() {
   //Log("entry : %d", entry);
   //((void (*)(void))entry)();
 
-  load_prog("bin/dummy");
+  load_prog("/bin/dummy");
 
   panic("Should not reach here");
 }
