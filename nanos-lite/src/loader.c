@@ -26,6 +26,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
   void *va;
 
   Log("loaded: [%d]%s size:%d", fd, filename, nbyte);
+  //Log("Map va to pa: 0x%08x to 0x%08x", va, pa);
 
   void *end = DEFAULT_ENTRY + nbyte;
   for (va = DEFAULT_ENTRY; va < end; va += PGSIZE) {
