@@ -43,7 +43,7 @@ int main() {
   //((void (*)(void))entry)();
 
   //load_prog("/bin/dummy");
-  load_prog("/bin/dummy");
+  load_prog("/bin/pal");
 
   panic("Should not reach here");
 }
