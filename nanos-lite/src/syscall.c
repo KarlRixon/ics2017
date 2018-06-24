@@ -91,7 +91,9 @@ _RegSet* do_syscall(_RegSet *r) {
 	case SYS_write:
 		return sys_write(r);
 	case SYS_brk:
-		return sys_brk(r);
+		//return sys_brk(r);
+		r->eax = mm_brk(a[1]);
+		return NULL;
 	case SYS_open:
 		return sys_open(r);
 	case SYS_read:
